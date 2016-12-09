@@ -65,7 +65,6 @@ public class UserTest extends AtriumBaseTestCase {
 		System.out.println("\nOpen user dashboard ...");
 		dashboardPage = homePage.selectUserDashboard();
 		System.out.println(" dashboardPage = " + dashboardPage);
-		
 	}
 	
 	private void checkDashboard() throws InterruptedException {
@@ -128,6 +127,10 @@ public class UserTest extends AtriumBaseTestCase {
 		System.out.println(" updatedSettings = " + updatedSettings);
 		Assert.assertEquals(updatedSettings, newSettings);
 		
+		System.out.println("\nReset settings ...");
+		settingsPage = settingsPage.updateSettings(expectedSettings);
+		UserSettings finalSettings = settingsPage.getUserSettings();
+		System.out.println(" finalSettings = " + finalSettings);
 	}
 	
 	private void changeSettings() {
