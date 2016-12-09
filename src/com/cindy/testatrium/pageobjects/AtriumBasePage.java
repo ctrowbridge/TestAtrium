@@ -63,11 +63,40 @@ public class AtriumBasePage extends BasePage {
 		return new SettingsPage(driver);
 	}
 	
+	public ProfileAccountPage selectUserProfile() throws InterruptedException {
+
+		WebElement menuButton = driver.findElement(By.id("user-badge-dropdown"));
+
+		Actions builder = new Actions(driver);
+		builder.moveToElement(menuButton).perform();
+
+		WebElement dashboardButton = driver.findElement(By.linkText("Edit profile"));
+		dashboardButton.click();
+
+		waitForElement(By.id("page-title"));
+
+		return new ProfileAccountPage(driver);
+	}
+	
 	public String getPageTitle() {
 		if (isElementPresent(By.id("page-title"))) {
 			WebElement pageTitle = driver.findElement(By.id("page-title"));
 			return pageTitle.getText();
 		}
 		return "Unknown";
+	}
+	
+	public LoginPage logout() throws InterruptedException {
+		WebElement menuButton = driver.findElement(By.id("user-badge-dropdown"));
+
+		Actions builder = new Actions(driver);
+		builder.moveToElement(menuButton).perform();
+
+		WebElement dashboardButton = driver.findElement(By.linkText("Log out"));
+		dashboardButton.click();
+
+		waitForElement(By.id("mini-panel-oa_toolbar_modern_panel"));
+
+		return new LoginPage(driver);
 	}
 }

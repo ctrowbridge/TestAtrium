@@ -9,6 +9,8 @@ import com.cindy.testatrium.data.UserSettings.DigestGroupingPref;
 import com.cindy.testatrium.data.UserSettings.EmailPref;
 import com.cindy.testatrium.pageobjects.DashboardPage;
 import com.cindy.testatrium.pageobjects.HomePage;
+import com.cindy.testatrium.pageobjects.ProfileAccountPage;
+import com.cindy.testatrium.pageobjects.ProfileUserInfoPage;
 import com.cindy.testatrium.pageobjects.SettingsPage;
 
 import org.testng.annotations.BeforeClass;
@@ -30,6 +32,8 @@ public class UserTest extends AtriumBaseTestCase {
 	private SettingsPage settingsPage;
 	
 	private final String settingsTitle = "Notification Settings";
+	private final String profileAccountTitle = "Account Info";
+	private final String profileUserTitle = "User Info";
 	
 	@BeforeClass
 	public void beforeClass() {
@@ -37,8 +41,8 @@ public class UserTest extends AtriumBaseTestCase {
 		createDriver(DriverType.CHROME, 15);
 	}
 
-	@Test
-	public void testUser() throws InterruptedException {
+	//@Test
+	public void testUserDashboard() throws InterruptedException {
 		
 		openLoginPage();
 		login();
@@ -49,15 +53,39 @@ public class UserTest extends AtriumBaseTestCase {
 		checkTopics();
 		checkReplyTopics();
 		
-		dashboardPage.selectHome();
+		logout();
+	}
+	
+	//@Test
+	public void testSettings() throws InterruptedException {
+		
+		openLoginPage();
+		login();
 
 		openSettings();
+		checkSettings();
+		logout();
+	}
+	
+	@Test
+	public void testProfile() throws InterruptedException {
+		
+		openLoginPage();
+		login();
+		
+		openProfile();
 
+		logout();
 	}
 
 	private void login() {
 		System.out.println("\nLogin in to site ...");
 		homePage = loginPage.login(userName, "admin");
+	}
+	
+	private void logout() throws InterruptedException {
+		System.out.println("\nLog out of site ...");
+		loginPage = loginPage.logout();
 	}
 	
 	private void openDashboard() throws InterruptedException {
@@ -107,12 +135,14 @@ public class UserTest extends AtriumBaseTestCase {
 		System.out.println("\nOpen user settings page ...");
 		settingsPage = homePage.selectUserSettings();
 		System.out.println(" userSettings = " + settingsPage);
-		System.out.println(" title =" + settingsPage.getTitle());
+		System.out.println(" title = " + settingsPage.getTitle());
 		
 		String pageTitle = settingsPage.getPageTitle();
 		System.out.println(" pageTitle = " + pageTitle);
 		Assert.assertEquals(pageTitle, settingsTitle);
-		
+	}
+	
+	private void checkSettings() throws InterruptedException {
 		System.out.println("\nCheck delivery preferences ...");
 		UserSettings expectedSettings = new UserSettings(EmailPref.HTML, DigestGroupingPref.ONE_DIGEST);
 		UserSettings userSettings = settingsPage.getUserSettings();
@@ -133,8 +163,25 @@ public class UserTest extends AtriumBaseTestCase {
 		System.out.println(" finalSettings = " + finalSettings);
 	}
 	
-	private void changeSettings() {
+	private void openProfile() throws InterruptedException {
 		
+		System.out.println("\nOpen Profile ...");
+		ProfileAccountPage profileAccountPage = homePage.selectUserProfile();
+		System.out.println(" profileAccountPage = " + profileAccountPage);
+		System.out.println(" title = " + profileAccountPage.getTitle());
+		
+		String pageTitle = profileAccountPage.getPageTitle();
+		System.out.println(" pageTitle = " + pageTitle);
+		Assert.assertEquals(pageTitle, profileAccountTitle);
+		
+		System.out.println("\nSwitch from Account Info to User Info ...");
+		ProfileUserInfoPage userInfoPage = profileAccountPage.switchToUserInfo();
+		System.out.println(" userInfoPage = " + userInfoPage);
+		System.out.println(" title = " + userInfoPage.getTitle());
+		
+		pageTitle = userInfoPage.getPageTitle();
+		System.out.println(" pageTitle = " + pageTitle);
+		Assert.assertEquals(pageTitle, profileUserTitle);
 	}
 	
 	@AfterClass
