@@ -1,5 +1,5 @@
-This project contains a set of automated tests to check the Atrium application.
+This project contains a set of automated tests to check the Open Atrium application.
 Automation is performed using Selenium.
 
-Download Atrium from:
+Download a full install of Open Atrium from:
 https://bitnami.com/stack/openatrium

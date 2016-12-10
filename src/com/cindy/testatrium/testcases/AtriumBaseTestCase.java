@@ -1,5 +1,7 @@
 package com.cindy.testatrium.testcases;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.testng.Assert;
 
 import com.cindy.SeleniumCommon.BaseTestCase;
@@ -11,15 +13,17 @@ public class AtriumBaseTestCase extends BaseTestCase {
 	
 	protected final String userName = "user";
 	protected final String siteTitle = "Cindy's Site";
+
+	private static final Logger logger = LogManager.getLogger("");
 	
 	protected void openLoginPage() throws InterruptedException {
-		System.out.println("\nOpen Login page ...");
+		logger.info("Open Login page ...");
 		loginPage = new LoginPage(driver);
 		loginPage = loginPage.open();
-		System.out.println(" loginPage = " + loginPage);
+		logger.info(" loginPage = " + loginPage);
 		String loginPageTitle = loginPage.getTitle();
 		
-		System.out.println(" title = " + loginPageTitle);
+		logger.info(" title = " + loginPageTitle);
 		Assert.assertEquals(siteTitle, siteTitle);
 	}
 

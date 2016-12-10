@@ -4,6 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+/**
+ * Page Object representing the Home page.
+ * 
+ * @author Cindy
+ */
 public class HomePage extends AtriumBasePage {
 
 	public HomePage(WebDriver driver) {

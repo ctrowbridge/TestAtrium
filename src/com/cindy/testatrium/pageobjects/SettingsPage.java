@@ -8,13 +8,23 @@ import com.cindy.testatrium.data.UserSettings;
 import com.cindy.testatrium.data.UserSettings.DigestGroupingPref;
 import com.cindy.testatrium.data.UserSettings.EmailPref;
 
+/**
+ * Page Object representing the Settings page.  Fields on the Settings
+ * page are represented by the UserSettings class.
+ * 
+ * @author Cindy
+ */
 public class SettingsPage extends AtriumBasePage {
 
 	public SettingsPage(WebDriver driver) {
 		super(driver);
-		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * Retrieves the current settings for this page
+	 * 
+	 * @return Current setting values
+	 */
 	public UserSettings getUserSettings() {
 		
 		UserSettings userSettings = new UserSettings();
@@ -41,6 +51,13 @@ public class SettingsPage extends AtriumBasePage {
 		return userSettings;
 	}
 	
+	/**
+	 * Updates and save the user settings.
+	 * 
+	 * @param toSettings Setting to use for the update.
+	 * @return Updated Settings page
+	 * @throws InterruptedException
+	 */
 	public SettingsPage updateSettings(UserSettings toSettings) throws InterruptedException {
 		
 		if (toSettings.getEmailPref() == EmailPref.HTML) {
@@ -59,9 +76,14 @@ public class SettingsPage extends AtriumBasePage {
 			WebElement digest0 = driver.findElement(By.id("edit-oa-messages-delivery-digest-grouping-group"));
 			digest0.click();
 		}
+		
+		// Save changes
+		//
 		WebElement saveButton = driver.findElement(By.id("edit-submit-top"));
 		saveButton.click();
 		
+		// Wait for changes to take effect
+		//
 		waitForElement(By.xpath("html/body/div[2]/div/div[3]/section/div/div[1]/div/div[1]/div/div"));
 		WebElement closeButton = driver.findElement(By.className("close"));
 		closeButton.click();

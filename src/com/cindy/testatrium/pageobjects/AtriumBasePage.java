@@ -1,5 +1,7 @@
 package com.cindy.testatrium.pageobjects;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,6 +15,8 @@ import com.cindy.SeleniumCommon.BasePage;
  */
 public class AtriumBasePage extends BasePage {
 
+	private static final Logger logger = LogManager.getLogger("AtriumBasePage");
+	
 	public AtriumBasePage(WebDriver driver) {
 		super(driver);
 	}
@@ -98,5 +102,33 @@ public class AtriumBasePage extends BasePage {
 		waitForElement(By.id("mini-panel-oa_toolbar_modern_panel"));
 
 		return new LoginPage(driver);
+	}
+	
+	public String getErrorMessage() {
+		String message = "";
+		if (isElementPresent(By.className("close"))) {
+			WebElement errorMessage = driver.findElement(By.xpath("//div[@class='alert alert-danger alert-dismissable']"));
+			logger.debug(" errorMessage innerHTML = " + errorMessage.getAttribute("innerHTML"));
+			logger.debug(" errorMessage text      = " + errorMessage.getText());
+			
+			message = errorMessage.getAttribute("innerHTML");
+			if (message.contains("<ul>")) {
+				
+				message = message.substring(message.lastIndexOf("<ul>")+1, message.length());
+				message = message.replace("</ul>", "");
+			} else {
+				message = message.substring(message.lastIndexOf('>')+1, message.length());
+			}
+		}
+		return message;
+	}
+	
+	public boolean closeErrorMessage() {
+		if (isElementPresent(By.className("close"))) {
+			WebElement closeButton = driver.findElement(By.className("close"));
+			closeButton.click();
+			return true;
+		}
+		return false;
 	}
 }

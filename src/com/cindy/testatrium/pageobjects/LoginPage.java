@@ -5,6 +5,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
+/**
+ * Page Object representing the Login page.
+ * 
+ * @author Cindy
+ */
 public class LoginPage extends AtriumBasePage {
 
 	public LoginPage(WebDriver driver) {

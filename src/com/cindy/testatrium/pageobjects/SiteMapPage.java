@@ -4,6 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+/**
+ * Page object representing the Site Map page.
+ * 
+ * @author Cindy
+ */
 public class SiteMapPage extends AtriumBasePage {
 
 	public SiteMapPage(WebDriver driver) {
