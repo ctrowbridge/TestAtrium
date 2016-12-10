@@ -19,6 +19,8 @@ import java.util.List;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Run tests for user.  Assumes new user.
@@ -35,9 +37,11 @@ public class UserTest extends AtriumBaseTestCase {
 	private final String profileAccountTitle = "Account Info";
 	private final String profileUserTitle = "User Info";
 	
+	private static final Logger logger = LogManager.getLogger("UserTest");
+	
 	@BeforeClass
 	public void beforeClass() {
-		System.out.println("\nCreate driver ...\n");
+		logger.info("Create driver ...");
 		createDriver(DriverType.CHROME, 15);
 	}
 
@@ -74,120 +78,119 @@ public class UserTest extends AtriumBaseTestCase {
 		login();
 		
 		openProfile();
-
 		logout();
 	}
 
 	private void login() {
-		System.out.println("\nLogin in to site ...");
+		logger.info("Login in to site ...");
 		homePage = loginPage.login(userName, "admin");
 	}
 	
 	private void logout() throws InterruptedException {
-		System.out.println("\nLog out of site ...");
+		logger.info("Log out of site ...");
 		loginPage = loginPage.logout();
 	}
 	
 	private void openDashboard() throws InterruptedException {
 		
-		System.out.println("\nOpen user dashboard ...");
+		logger.info("Open user dashboard ...");
 		dashboardPage = homePage.selectUserDashboard();
-		System.out.println(" dashboardPage = " + dashboardPage);
+		logger.info(" dashboardPage = " + dashboardPage);
 	}
 	
 	private void checkDashboard() throws InterruptedException {
 				
 		String title = dashboardPage.getTitle();
-		System.out.println(" title = " + title);
+		logger.info(" title = " + title);
 		Assert.assertEquals(title, userName + " | " + siteTitle);
 		
 		String header = dashboardPage.getHeader();
-		System.out.println(" header = " + header);
+		logger.info(" header = " + header);
 		Assert.assertEquals(header, userName);
 	}
 	
 	private void checkTasks() {
-		System.out.println("\nCheck tasks ...");
+		logger.info("Check tasks ...");
 		List<Task> taskList = dashboardPage.getTasks();
 		
-		System.out.println(" taskList size = " + taskList.size());
+		logger.info(" taskList size = " + taskList.size());
 		Assert.assertEquals(taskList.size(), 0);
 	}
 	
 	private void checkTopics() {
-		System.out.println("\nCheck topics ...");
+		logger.info("Check topics ...");
 		List<Topic> topicList = dashboardPage.getTopics();
 		
-		System.out.println(" topicList size = " + topicList.size());
+		logger.info(" topicList size = " + topicList.size());
 		Assert.assertEquals(topicList.size(), 0);
 	}
 	
 	private void checkReplyTopics() {
-		System.out.println("\nCheck topics ...");
+		logger.info("\nCheck topics ...");
 		List<Topic> topicList = dashboardPage.getReplyTopics();
 		
-		System.out.println(" replyTopicList size = " + topicList.size());
+		logger.info(" replyTopicList size = " + topicList.size());
 		Assert.assertEquals(topicList.size(), 0);
 	}
 	
 	private void openSettings() throws InterruptedException {
 
-		System.out.println("\nOpen user settings page ...");
+		logger.info("Open user settings page ...");
 		settingsPage = homePage.selectUserSettings();
-		System.out.println(" userSettings = " + settingsPage);
-		System.out.println(" title = " + settingsPage.getTitle());
+		logger.info(" userSettings = " + settingsPage);
+		logger.info(" title = " + settingsPage.getTitle());
 		
 		String pageTitle = settingsPage.getPageTitle();
-		System.out.println(" pageTitle = " + pageTitle);
+		logger.info(" pageTitle = " + pageTitle);
 		Assert.assertEquals(pageTitle, settingsTitle);
 	}
 	
 	private void checkSettings() throws InterruptedException {
-		System.out.println("\nCheck delivery preferences ...");
+		logger.info("Check delivery preferences ...");
 		UserSettings expectedSettings = new UserSettings(EmailPref.HTML, DigestGroupingPref.ONE_DIGEST);
 		UserSettings userSettings = settingsPage.getUserSettings();
-		System.out.println(" userSettings = " + userSettings);
+		logger.info(" userSettings = " + userSettings);
 		Assert.assertEquals(userSettings, expectedSettings);
 		
-		System.out.println("\nCheck update of settings ...");
+		logger.info("Check update of settings ...");
 		UserSettings newSettings = new UserSettings(EmailPref.PLAIN_TEXT, DigestGroupingPref.COMBINED_DIGEST);
 		settingsPage = settingsPage.updateSettings(newSettings);
 		
 		UserSettings updatedSettings = settingsPage.getUserSettings();
-		System.out.println(" updatedSettings = " + updatedSettings);
+		logger.info(" updatedSettings = " + updatedSettings);
 		Assert.assertEquals(updatedSettings, newSettings);
 		
-		System.out.println("\nReset settings ...");
+		logger.info("Reset settings ...");
 		settingsPage = settingsPage.updateSettings(expectedSettings);
 		UserSettings finalSettings = settingsPage.getUserSettings();
-		System.out.println(" finalSettings = " + finalSettings);
+		logger.info(" finalSettings = " + finalSettings);
 	}
 	
 	private void openProfile() throws InterruptedException {
 		
-		System.out.println("\nOpen Profile ...");
+		logger.info("Open Profile ...");
 		ProfileAccountPage profileAccountPage = homePage.selectUserProfile();
-		System.out.println(" profileAccountPage = " + profileAccountPage);
-		System.out.println(" title = " + profileAccountPage.getTitle());
+		logger.info(" profileAccountPage = " + profileAccountPage);
+		logger.info(" title = " + profileAccountPage.getTitle());
 		
 		String pageTitle = profileAccountPage.getPageTitle();
-		System.out.println(" pageTitle = " + pageTitle);
+		logger.info(" pageTitle = " + pageTitle);
 		Assert.assertEquals(pageTitle, profileAccountTitle);
 		
-		System.out.println("\nSwitch from Account Info to User Info ...");
+		logger.info("Switch from Account Info to User Info ...");
 		ProfileUserInfoPage userInfoPage = profileAccountPage.switchToUserInfo();
-		System.out.println(" userInfoPage = " + userInfoPage);
-		System.out.println(" title = " + userInfoPage.getTitle());
+		logger.info(" userInfoPage = " + userInfoPage);
+		logger.info(" title = " + userInfoPage.getTitle());
 		
 		pageTitle = userInfoPage.getPageTitle();
-		System.out.println(" pageTitle = " + pageTitle);
+		logger.info(" pageTitle = " + pageTitle);
 		Assert.assertEquals(pageTitle, profileUserTitle);
 	}
 	
 	@AfterClass
 	public void afterClass() {
 
-		System.out.println("\nClose driver ...\n");
+		logger.info("Close driver ...\n");
 		driver.close();
 	}
 
