@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 /**
- * Page object representing the User Info / Profile page.
+ * Page Object representing the User Info / Profile page.
  * 
  * @author Cindy
  */

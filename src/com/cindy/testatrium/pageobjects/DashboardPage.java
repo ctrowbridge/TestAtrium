@@ -12,7 +12,7 @@ import com.cindy.testatrium.data.Topic;
 
 
 /**
- * Page object representing the User Dashboard Page.  The User
+ * Page Object representing the User Dashboard Page.  The User
  * Dashboard page displays a summary of user spaces, tasks, topics
  * and reply topics.
  * 

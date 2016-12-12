@@ -10,12 +10,16 @@ import org.testng.annotations.BeforeClass;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 
+/**
+ * Contains some basic tests for Atrium.
+ * 
+ * @author Cindy
+ */
 public class Basic extends AtriumBaseTestCase {
 
 	private final String siteTitle = "Cindy's Site";
 	private final String siteHeader = "SITE MAP FOR CINDY'S SITE";
 	
-
 	SiteMapPage siteMapPage;
 	
 	@BeforeClass
@@ -24,13 +28,23 @@ public class Basic extends AtriumBaseTestCase {
 		createDriver(DriverType.CHROME, 15);
 	}
 
+	/**
+	 * Checks login and site map
+	 * 
+	 * @throws InterruptedException
+	 */
 	@Test
-	public void f() throws InterruptedException {
+	public void basicTest() throws InterruptedException {
 		
 		openLoginPage();
 		openSiteMapPage();
 	}
 
+	/**
+	 * Opens the Site Map page
+	 * 
+	 * @throws InterruptedException
+	 */
 	private void openSiteMapPage() throws InterruptedException {
 		System.out.println("\nOpen Site Map ...");
 		siteMapPage = loginPage.selectSiteMap();

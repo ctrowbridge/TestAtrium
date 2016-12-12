@@ -23,7 +23,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
- * Run tests for user. Assumes new user.
+ * Contains tests for user.
  * 
  * @author Cindy
  */
@@ -50,6 +50,11 @@ public class UserTest extends AtriumBaseTestCase {
 		createDriver(DriverType.CHROME, 15);
 	}
 
+	/**
+	 * Test the User Dashboard page
+	 * 
+	 * @throws InterruptedException
+	 */
 	// @Test
 	public void testUserDashboard() throws InterruptedException {
 
@@ -65,6 +70,11 @@ public class UserTest extends AtriumBaseTestCase {
 		logout();
 	}
 
+	/**
+	 * Test the Settings page
+	 * 
+	 * @throws InterruptedException
+	 */
 	// @Test
 	public void testSettings() throws InterruptedException {
 
