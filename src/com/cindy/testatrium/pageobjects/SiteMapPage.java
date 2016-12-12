@@ -19,4 +19,5 @@ public class SiteMapPage extends AtriumBasePage {
 		WebElement header = driver.findElement(By.tagName("h2"));
 		return header.getText();
 	}
+	
 }

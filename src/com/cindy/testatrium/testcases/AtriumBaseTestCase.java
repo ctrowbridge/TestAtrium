@@ -14,12 +14,12 @@ import com.cindy.testatrium.pageobjects.LoginPage;
  */
 public class AtriumBaseTestCase extends BaseTestCase {
 
-	LoginPage loginPage;
+	protected LoginPage loginPage;
 
 	protected final String userName = "user";
 	protected final String siteTitle = "Cindy's Site";
 
-	private static final Logger logger = LogManager.getLogger("");
+	private static final Logger logger = LogManager.getLogger("AtriumBaseTestCase");
 
 	/**
 	 * Opens the Login page.
