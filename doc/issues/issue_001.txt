@@ -1,0 +1,29 @@
+Issue 1 - Unable to Add New Space
+----------------------------------------------------------------
+
+Severity:  Medium (work around exists via left menu)
+
+Automated Test:  N/A
+
+Steps to Recreate:
+ 1) Navigate to Open Atribum web site
+ 2) Log in as user -> Home Page
+ 3) Select "Create Content"
+ 4) Select "New Space" -> ADD NEW SPACE Popup
+
+Expected Results:
+ Expect to be able to add a new space.
+ 
+ Actual Results:
+  There is no way to submit the new space.  The "Publish" button is off screen and
+  there is no way to scroll to it. Even if I open the page on HD monitor, I
+  can't see any Publish button.
+  
+  See screen shot "issue_001_screenshot_01.png". Screen shot "issue_001_screenshot_02.png"
+  shows what the whole screen looks like.
+   
+Envirnoment:
+  Windows 7 74 bit.
+  Firefox Browser 50.0.1
+  Web Site Version Bitnami Open Atrium Stack 2.611, Rev 0
+  
