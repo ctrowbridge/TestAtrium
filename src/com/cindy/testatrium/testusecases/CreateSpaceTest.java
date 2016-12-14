@@ -5,19 +5,18 @@ import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import com.cindy.SeleniumCommon.BaseTestCase.DriverType;
 import com.cindy.testatrium.data.Space;
+import com.cindy.testatrium.data.Space.GroupVisibility;
 import com.cindy.testatrium.pageobjects.AddContentPage;
-import com.cindy.testatrium.pageobjects.AtriumBasePage;
 import com.cindy.testatrium.pageobjects.CreateDefaultSpacePage;
 import com.cindy.testatrium.pageobjects.HomePage;
 import com.cindy.testatrium.pageobjects.SiteMapPage;
+import com.cindy.testatrium.pageobjects.SpacePage;
 import com.cindy.testatrium.testcases.AtriumBaseTestCase;
 
 /**
@@ -26,7 +25,7 @@ import com.cindy.testatrium.testcases.AtriumBaseTestCase;
  * @author Cindy
  */
 /*-
- * Scenario 1:  Create a new Space
+ * Scenario 1:  Create a new Default Space
  * 		given  A new instance of OpenAtrium
  *  	and    OpenAtrium is running
  *  	then   Open Login page
@@ -39,9 +38,13 @@ public class CreateSpaceTest extends AtriumBaseTestCase {
 
 	private static final Logger logger = LogManager.getLogger("CreateSpaceTest");
 	
+	private static String spaceName = "My Default Space";
+	private static String spaceDescription = "My Default Space Description";
+	
 	HomePage homePage;
 	SiteMapPage siteMapPage;
 	AddContentPage addContentPage;
+	SpacePage spacePage;
 
 	@BeforeClass
 	public void beforeClass() {
@@ -57,6 +60,7 @@ public class CreateSpaceTest extends AtriumBaseTestCase {
 		openLoginPage();
 		login();
 		createDefaultSpace();
+		checkDefaultSpace();
 			
 		logout();
 	}
@@ -89,10 +93,21 @@ public class CreateSpaceTest extends AtriumBaseTestCase {
 		
 		logger.info("Create default space ...");
 		Space newSpace = new Space();
-		newSpace.setTitle("My Default Group");
-		newSpace.setDescription("My Default Group Description");
-		//newSpace.set
-		//defaultSpacePage = defaultSpacePage.createSpace(newSpace);
+		newSpace.setTitle(spaceName);
+		newSpace.setDescription(spaceDescription);
+		newSpace.setGroupVisibilty(GroupVisibility.PUBLIC);
+		newSpace.setProvideMenuLink(true);
+		
+		spacePage = defaultSpacePage.createSpace(newSpace);
+		logger.info(" spacePage = " + spacePage);
+		
+		spacePage.selectHome();
+		
+	}
+	
+	private void checkDefaultSpace() {
+		logger.info("Check default space ...");
+		Assert.assertTrue(homePage.isSpaceMenuPresent(spaceName));
 		
 	}
 	

@@ -17,6 +17,9 @@ public class AtriumBasePage extends BasePage {
 
 	private static final Logger logger = LogManager.getLogger("AtriumBasePage");
 	
+	protected By mainMenuButtonLocator = By.linkText("Recent Spaces");
+	protected By errorLocator = By.xpath("//div[@class='alert alert-danger alert-dismissable']");
+	
 	public AtriumBasePage(WebDriver driver) {
 		super(driver);
 	}
@@ -111,7 +114,7 @@ public class AtriumBasePage extends BasePage {
 		
 		String message = "";
 		if (isElementPresent(By.className("close"))) {
-			WebElement errorMessage = driver.findElement(By.xpath("//div[@class='alert alert-danger alert-dismissable']"));
+			WebElement errorMessage = driver.findElement(errorLocator);
 			logger.debug(" errorMessage innerHTML = " + errorMessage.getAttribute("innerHTML"));
 			logger.debug(" errorMessage text      = " + errorMessage.getText());
 			
@@ -136,4 +139,5 @@ public class AtriumBasePage extends BasePage {
 		}
 		return false;
 	}
+	
 }

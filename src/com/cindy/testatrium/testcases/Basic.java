@@ -14,14 +14,18 @@ import org.testng.annotations.AfterClass;
 
 /**
  * Contains some basic tests for Atrium that can be run without logging
- * in.  Assumes user is logged out.
+ * in.
  * 
  * @author Cindy
  */
 public class Basic extends AtriumBaseTestCase {
 
+	/**
+	 * Title for site - this is set when the Bitnami Atrium installer is run.
+	 */
 	private final String siteTitle = "Cindy's Site";
-	private final String siteHeader = "SITE MAP FOR CINDY'S SITE";
+	private final String siteHeader = "SITE MAP FOR " + siteTitle.toUpperCase();
+	
 	private static final Logger logger = LogManager.getLogger("Basic");
 	
 	SiteMapPage siteMapPage;
@@ -47,28 +51,6 @@ public class Basic extends AtriumBaseTestCase {
 		checkLoginPage();
 		openSiteMapPage();
 	}
-
-	/**
-	 * Opens the Site Map page
-	 * 
-	 * @throws InterruptedException
-	 */
-	private void openSiteMapPage() throws InterruptedException {
-		
-		logger.info("Open Site Map ...");
-		siteMapPage = loginPage.selectSiteMap();
-		logger.info(" siteMapPage = " + siteMapPage);
-		String siteMapTitle = siteMapPage.getTitle();
-		String header = siteMapPage.getHeader();
-		
-		logger.info(" title  = " + siteMapTitle);
-		logger.info(" header = " + header);
-		
-		Assert.assertEquals(siteMapTitle, siteTitle);
-		Assert.assertEquals(header, siteHeader);
-		loginPage = siteMapPage.selectHome();
-		
-	}
 	
 	private void checkLoginPage() throws InterruptedException {
 		
@@ -76,7 +58,7 @@ public class Basic extends AtriumBaseTestCase {
 		//
 		Assert.assertFalse(loginPage.isLoggedIn());
 		
-		// Check documentation url
+		// Check documentation URL
 		//
 		logger.info("Check documentation URL ...");
 		String url = loginPage.getDocumentationURL();
@@ -100,6 +82,28 @@ public class Basic extends AtriumBaseTestCase {
 		
 		loginPage = searchResultsPage.selectHome();
 	}	
+	
+	/**
+	 * Opens the Site Map page
+	 * 
+	 * @throws InterruptedException
+	 */
+	private void openSiteMapPage() throws InterruptedException {
+		
+		logger.info("Open Site Map ...");
+		siteMapPage = loginPage.selectSiteMap();
+		logger.info(" siteMapPage = " + siteMapPage);
+		String siteMapTitle = siteMapPage.getTitle();
+		String header = siteMapPage.getHeader();
+		
+		logger.info(" title  = " + siteMapTitle);
+		logger.info(" header = " + header);
+		
+		Assert.assertEquals(siteMapTitle, siteTitle);
+		Assert.assertEquals(header, siteHeader);
+		loginPage = siteMapPage.selectHome();
+		
+	}
 	
 	@AfterClass
 	public void afterClass() {

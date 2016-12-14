@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 /**
  * Page Object representing the Home page for a logged in user.
@@ -69,5 +70,21 @@ public class HomePage extends AtriumBasePage {
 		
 		logger.info(" Content Page found " + getTitle());
 		return new AddContentPage(driver);
+	}
+	
+	public boolean isSpaceMenuPresent(String spaceName) {
+		return isElementPresent(By.linkText(spaceName));
+	}
+	
+	public SpacePage selectSpace(String spaceName) {
+		
+		WebElement menuButton = driver.findElement(mainMenuButtonLocator);
+
+		Actions builder = new Actions(driver);
+		builder.moveToElement(menuButton).perform();
+		
+		WebElement spaceButton = driver.findElement(By.linkText(spaceName));
+		
+		return new SpacePage(driver);
 	}
 }

@@ -20,7 +20,6 @@ public class LoginPage extends AtriumBasePage {
 	private By siteMapLocator = By.linkText("Site map");
 	private By loginButtonLocator = By.linkText("Login");
 	private By documentationLocation = By.linkText("documentation");
-	private By mainMenuButtonLocator = By.linkText("Recent Spaces");
 	private By searchFieldLocator = By.name("search_text");
 	private By searchFieldButtonLocator = By.xpath("//button[@type='submit']");
 	private By searchLabelLocator = By.xpath("//div[@id='edit-basic']/div/label");
