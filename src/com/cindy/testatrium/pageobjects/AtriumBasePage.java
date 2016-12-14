@@ -9,7 +9,7 @@ import org.openqa.selenium.interactions.Actions;
 import com.cindy.SeleniumCommon.BasePage;
 
 /**
- * Implements a Base Page Object for Attrium tests.
+ * Implements a Base Page Object for Atrium tests.
  * 
  * @author Cindy
  */
@@ -31,6 +31,7 @@ public class AtriumBasePage extends BasePage {
 	}
 	
 	public LoginPage selectHome() throws InterruptedException {
+		
 		driver.findElement(By.cssSelector("img.oa-site-banner-img")).click();
 		waitForElement(By.cssSelector("h1"));
 
@@ -83,6 +84,7 @@ public class AtriumBasePage extends BasePage {
 	}
 	
 	public String getPageTitle() {
+		
 		if (isElementPresent(By.id("page-title"))) {
 			WebElement pageTitle = driver.findElement(By.id("page-title"));
 			return pageTitle.getText();
@@ -91,6 +93,7 @@ public class AtriumBasePage extends BasePage {
 	}
 	
 	public LoginPage logout() throws InterruptedException {
+		
 		WebElement menuButton = driver.findElement(By.id("user-badge-dropdown"));
 
 		Actions builder = new Actions(driver);
@@ -105,6 +108,7 @@ public class AtriumBasePage extends BasePage {
 	}
 	
 	public String getErrorMessage() {
+		
 		String message = "";
 		if (isElementPresent(By.className("close"))) {
 			WebElement errorMessage = driver.findElement(By.xpath("//div[@class='alert alert-danger alert-dismissable']"));
@@ -124,6 +128,7 @@ public class AtriumBasePage extends BasePage {
 	}
 	
 	public boolean closeErrorMessage() {
+		
 		if (isElementPresent(By.className("close"))) {
 			WebElement closeButton = driver.findElement(By.className("close"));
 			closeButton.click();

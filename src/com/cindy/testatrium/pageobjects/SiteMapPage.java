@@ -11,6 +11,9 @@ import org.openqa.selenium.WebElement;
  */
 public class SiteMapPage extends AtriumBasePage {
 
+	private By newSpaceLocator = By.className("oa-subspace-icon");
+	private By newSpaceTitleLocator = By.id("modal-title");
+	
 	public SiteMapPage(WebDriver driver) {
 		super(driver);
 	}
@@ -20,4 +23,16 @@ public class SiteMapPage extends AtriumBasePage {
 		return header.getText();
 	}
 	
+	public AddNewSpacePage selectNewSpace() {
+		WebElement newSpaceButton = driver.findElement(newSpaceLocator);
+		newSpaceButton.click();
+		
+		waitForElementnewSpaceTitleLocator();
+		return new AddNewSpacePage(driver);
+	}
+
+	private void waitForElementnewSpaceTitleLocator() {
+		// TODO Auto-generated method stub
+		
+	}
 }

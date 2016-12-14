@@ -13,6 +13,7 @@
 <tr><td><a href="login.html">login</a></td></tr>
 <tr><td><a href="user_dashboard.html">user_dashboard</a></td></tr>
 <tr><td><a href="search.html">search</a></td></tr>
+<tr><td><a href="default_space.html">default_space</a></td></tr>
 </tbody></table>
 </body>
 </html>
