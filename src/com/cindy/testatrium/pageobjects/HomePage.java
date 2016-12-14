@@ -87,8 +87,4 @@ public class HomePage extends AtriumBasePage {
 		
 		return new SpacePage(driver);
 	}
-	
-	public int countSpaces() {
-		
-	}
 }
