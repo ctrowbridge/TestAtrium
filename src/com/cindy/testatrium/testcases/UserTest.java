@@ -23,7 +23,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
- * Contains tests for user.
+ * Contains various tests for user-related functionality.
  * 
  * @author Cindy
  */

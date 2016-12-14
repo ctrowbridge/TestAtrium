@@ -22,6 +22,7 @@ public class Basic extends AtriumBaseTestCase {
 
 	/**
 	 * Title for site - this is set when the Bitnami Atrium installer is run.
+	 * TODO Read site title from a configuration file.
 	 */
 	private final String siteTitle = "Cindy's Site";
 	private final String siteHeader = "SITE MAP FOR " + siteTitle.toUpperCase();
