@@ -2,11 +2,14 @@ package com.cindy.testatrium.testusecases;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.cindy.SeleniumCommon.BaseTestCase.DriverType;
+import com.cindy.testatrium.pageobjects.AdminPage;
+import com.cindy.testatrium.pageobjects.HomePage;
 import com.cindy.testatrium.testcases.AtriumBaseTestCase;
 
 /**
@@ -29,6 +32,9 @@ public class AddUserTest extends AtriumBaseTestCase {
 
 	private static final Logger logger = LogManager.getLogger("AddUserTest");
 	
+	HomePage homePage;
+	AdminPage adminPage;
+	
 	@BeforeClass
 	public void beforeClass() {
 		logger.info("Create driver ...");
@@ -36,7 +42,25 @@ public class AddUserTest extends AtriumBaseTestCase {
 	}
 	
 	@Test
-	public void f() {
+	public void testAddUser() throws InterruptedException {
+		openLoginPage();
+		login();
+	}
+	
+	private void login() {
+		logger.info("Login in to site ...");
+		homePage = loginPage.login(userName, "admin");
+	}
+	
+	private void openAdminPage() throws InterruptedException {
+
+		logger.info("Open Admin page ...");
+		adminPage = new AdminPage(driver);
+		adminPage = adminPage.open();
+		logger.info(" adminPage = " + adminPage);
+		String title = adminPage.getTitle();
+		logger.info(" title = " + title);
+		String header = adminPage.getHeader();
 		
 	}
 	

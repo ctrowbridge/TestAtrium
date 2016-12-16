@@ -1,5 +1,7 @@
 package com.cindy.testatrium.pageobjects;
 
+import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
@@ -19,6 +21,8 @@ public class AtriumBasePage extends BasePage {
 	
 	protected By mainMenuButtonLocator = By.linkText("Recent Spaces");
 	protected By errorLocator = By.xpath("//div[@class='alert alert-danger alert-dismissable']");
+	protected By breadcrumbLocator = By.id("breadcrumb");
+	protected By pageTitleLocator = By.id("page-title");
 	
 	public AtriumBasePage(WebDriver driver) {
 		super(driver);
@@ -31,6 +35,11 @@ public class AtriumBasePage extends BasePage {
 	public AtriumBasePage back() {
 		driver.navigate().back();
 		return new AtriumBasePage(driver);
+	}
+	
+	public String getHeader() {
+		WebElement header = driver.findElement(pageTitleLocator);
+		return header.getText();
 	}
 	
 	public LoginPage selectHome() throws InterruptedException {
@@ -140,4 +149,21 @@ public class AtriumBasePage extends BasePage {
 		return false;
 	}
 	
+	public String getBreadcrumbs() {
+		String breadcrumbs = "";
+		if (isElementPresent(breadcrumbLocator)) {
+			WebElement breadcrumbDiv = driver.findElement(breadcrumbLocator);
+			List<WebElement> links = breadcrumbDiv.findElements(By.tagName("a"));
+			int linkCount = links.size();
+			int i = 0;
+			for (WebElement link : links) {
+				breadcrumbs += link.getText();
+				if (i < linkCount-1) {
+					breadcrumbs += ">>";
+				}
+				i++;
+			}
+		}
+		return breadcrumbs;
+	}
 }

@@ -7,6 +7,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+/**
+ * Page Object representing the Admin page.  The Admin Page contains a
+ * list of administrative tasks.
+ * 
+ * @author Cindy
+ *
+ */
 public class AdminPage extends AtriumBasePage {
 
 	String url = "http://127.0.0.1/openatrium/admin";
@@ -16,7 +23,9 @@ public class AdminPage extends AtriumBasePage {
 	private static By taskLinkLocator = By.tagName("a");
 	private static By tasksTabLocator = By.partialLinkText("Tasks");
 	private static By indexTabLocator = By.partialLinkText("Index");
-	private static By pageTitleLocator = By.id("page-title");
+	private static By reportLinkLocator = By.linkText("Reports");
+	private static By reportAdminLocator = By.linkText("Administration");
+	private static By peopleLinkLocator = By.linkText("People");
 	
 	public AdminPage(WebDriver driver) {
 		super(driver);
@@ -29,11 +38,6 @@ public class AdminPage extends AtriumBasePage {
 		waitForElement(navbarLocator);
 
 		return this;
-	}
-	
-	public String getHeader() {
-		WebElement header = driver.findElement(pageTitleLocator);
-		return header.getText();
 	}
 	
 	public List<String> getTasks() {
@@ -59,5 +63,23 @@ public class AdminPage extends AtriumBasePage {
 		WebElement indexTab = driver.findElement(indexTabLocator);
 		indexTab.click();
 		return this;
+	}
+	
+	public ReportsPage selectReportsPage() throws InterruptedException {
+		WebElement reportsLink = driver.findElement(reportLinkLocator);
+		reportsLink.click();
+		
+		waitForElement(reportAdminLocator);
+		
+		return new ReportsPage(driver);
+	}
+	
+	public PeoplePage selectPeoplePage() throws InterruptedException {
+		WebElement reportsLink = driver.findElement(peopleLinkLocator);
+		reportsLink.click();
+		
+		waitForElement(reportAdminLocator);
+		
+		return new PeoplePage(driver);
 	}
 }
