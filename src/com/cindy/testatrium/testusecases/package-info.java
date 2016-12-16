@@ -3,7 +3,7 @@
  */
 package com.cindy.testatrium.testusecases;
 
-/**
+/*-
  * http://docs.openatrium.com/open-atrium-webinars/10-tips-tricks-using-open-atrium 
  *
  * Open Atrium Use Cases
@@ -36,4 +36,51 @@ package com.cindy.testatrium.testusecases;
  * for of course being a calendar, can use the multimedia tools to provide
  * lectures or lessons online, and use the discussions and documentation
  * sections to really provide that kind of online classroom for people.
+ */
+
+/*-
+ * https://www.drupal.org/node/2752303
+ * 
+ * Use case: Public space, public section and write permission via group
+ * membership
+ * 
+ * Last updated June 21, 2016. Created on June 20, 2016. Edited by joep.hendrix.
+ * Log in to edit this page.
+ * 
+ * Description
+ * ===========
+ * Public space with a public Discussion section. Configure write permission
+ * managed via Group membership and not via direct space membership.
+ * 
+ * Assumptions
+ * ===========
+ * Clean install of OA 7.x-2.64 without any modification of default permission
+ * settings.
+ * 
+ * Permissions
+ * ===========
+ *   READ access
+ *   -----------
+ *   Since the space is public and the section is public, every visitor will have
+ *   READ access to the space and the content in the public sections.
+ *   
+ *   WRITE access
+ *   ------------
+ *   In order to configure write access via group membership, follow the steps
+ *   below:
+ * 
+ *   Step 1: Create group
+ *   --------------------
+ *   Create a new group and select
+ *   "Child's permissions - inherited users in this group's subgroups will
+ *    have the permissions of a generic member of that subgroup."
+ *    in the "Group user permission inheritance" paragraph.
+ * 
+ *   Step 2: Add user(s)
+ *   -------------------
+ *   Add the users you want to have write access to this group.
+ * 
+ *   Step 3: Add group to space
+ *   -------------------------
+ *   Go to the space and add the group to the members list.
  */
