@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
+import com.cindy.testatrium.data.UserInfo;
+
 /**
  * Page Object representing the Login page. The Login page allows the
  * user to log in to Atrium. It also provides a link to the site map,
@@ -58,6 +60,14 @@ public class LoginPage extends AtriumBasePage {
 		return new SiteMapPage(driver);
 	}
 
+	public HomePage login(UserInfo user) {
+
+		login(user.getUsername(), user.getPassword());
+
+		return new HomePage(driver);
+	}
+	
+	
 	public HomePage login(String user, String password) {
 
 		driver.findElement(usernameLocator).clear();

@@ -105,7 +105,7 @@ public class UserTest extends AtriumBaseTestCase {
 
 	private void login() {
 		logger.info("Login in to site ...");
-		homePage = loginPage.login(userName, "admin");
+		homePage = loginPage.login(mainUser);
 	}
 
 	private void logout() throws InterruptedException {

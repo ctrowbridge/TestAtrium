@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -26,6 +27,8 @@ public class AdminTest extends AtriumBaseTestCase {
 	private static final Logger logger = LogManager.getLogger("AdminTest");
 	private static final String expectedHeader = "Administration";
 	private static final String peopleExpectedHeader = "People";
+	private static final String noOp = "No operation selected. Please select an operation to perform.";
+	private static final String noItem = "Please select at least one item.";
 
 	HomePage homePage;
 	AdminPage adminPage;
@@ -38,6 +41,11 @@ public class AdminTest extends AtriumBaseTestCase {
 		createDriver(DriverType.CHROME, 15);
 	}
 
+	/**
+	 * Tests various capabilities of the Admin page.
+	 * 
+	 * @throws InterruptedException
+	 */
 	@Test
 	public void testAdminPage() throws InterruptedException {
 		
@@ -45,14 +53,18 @@ public class AdminTest extends AtriumBaseTestCase {
 		login();
 		openAdminPage();
 		checkTasks();
-		openReportsPage();
-		openPeoplePage();
 		
+		openReportsPage();
+		reportsPage.back();
+		
+		openPeoplePage();
+		checkPeoplePage();
+		adminPage = adminPage.open();
 	}
 
 	private void login() {
 		logger.info("Login in to site ...");
-		homePage = loginPage.login(userName, "admin");
+		homePage = loginPage.login(mainUser);
 		logger.info(" homePage = " + homePage);
 	}
 	
@@ -85,8 +97,6 @@ public class AdminTest extends AtriumBaseTestCase {
 		reportsPage = adminPage.selectReportsPage();
 		logger.info(" reportsPage = " + reportsPage);
 		logger.info(" breadcrumbs = " + reportsPage.getBreadcrumbs());
-		
-		reportsPage.back();
 	}
 	
 	private void openPeoplePage() throws InterruptedException {
@@ -95,9 +105,12 @@ public class AdminTest extends AtriumBaseTestCase {
 		peoplePage = adminPage.selectPeoplePage();
 		logger.info(" peoplePage = " + peoplePage);
 		logger.info(" breadcrumbs = " + peoplePage.getBreadcrumbs());
-		
 		String title = peoplePage.getTitle();
 		logger.info(" title = " + title);
+	}
+	
+	private void checkPeoplePage() throws InterruptedException {
+		
 		String header = peoplePage.getHeader();
 		Assert.assertEquals(header, peopleExpectedHeader);
 		logger.info(" header = " + header);
@@ -115,10 +128,15 @@ public class AdminTest extends AtriumBaseTestCase {
 		peoplePage.setFilterUsername("XXXXXXX");
 		peoplePage.selectApplyFilter();
 		people = peoplePage.getPeople();
-		logger.info(" people size = " + people.size());
+		logger.info(" people size = " + people.size());		
 		Assert.assertEquals(people.size(), 0);
-		
-		adminPage = adminPage.open();
+
+		logger.info("Click Execute ...");
+		peoplePage = peoplePage.selectExecute();
+		String errorMessage = peoplePage.getErrorMessage();
+		logger.info(" errorMessage = " + errorMessage);
+		Assert.assertTrue(errorMessage.contains(noOp));
+		Assert.assertTrue(errorMessage.contains(noItem));
 	}
 	
 	@AfterClass

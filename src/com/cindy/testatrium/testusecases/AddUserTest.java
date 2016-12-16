@@ -49,7 +49,7 @@ public class AddUserTest extends AtriumBaseTestCase {
 	
 	private void login() {
 		logger.info("Login in to site ...");
-		homePage = loginPage.login(userName, "admin");
+		homePage = loginPage.login(mainUser);
 	}
 	
 	private void openAdminPage() throws InterruptedException {

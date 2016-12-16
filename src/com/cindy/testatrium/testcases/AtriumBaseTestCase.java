@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.testng.Assert;
 
 import com.cindy.SeleniumCommon.BaseTestCase;
+import com.cindy.testatrium.data.UserInfo;
 import com.cindy.testatrium.pageobjects.LoginPage;
 
 /**
@@ -12,12 +13,13 @@ import com.cindy.testatrium.pageobjects.LoginPage;
  * 
  * @author Cindy
  */
-public class AtriumBaseTestCase extends BaseTestCase {
+public abstract class AtriumBaseTestCase extends BaseTestCase {
 
 	protected LoginPage loginPage;
 
 	protected final String userName = "user";
 	protected final String siteTitle = "Cindy's Site";
+	protected final UserInfo mainUser = new UserInfo(userName, "admin");
 
 	private static final Logger logger = LogManager.getLogger("AtriumBaseTestCase");
 
@@ -27,6 +29,7 @@ public class AtriumBaseTestCase extends BaseTestCase {
 	 * @throws InterruptedException
 	 */
 	protected void openLoginPage() throws InterruptedException {
+		
 		logger.info("Open Login page ...");
 		loginPage = new LoginPage(driver);
 		loginPage = loginPage.open();

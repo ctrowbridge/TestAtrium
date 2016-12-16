@@ -12,6 +12,12 @@ import org.openqa.selenium.WebElement;
 import com.cindy.testatrium.data.AccountInfo.Status;
 import com.cindy.testatrium.data.UserInfo;
 
+/**
+ * Page Object representing the People Page. The People Page shows the list
+ * of current users.
+ * 
+ * @author Cindy
+ */
 public class PeoplePage extends AtriumBasePage {
 
 	private static final Logger logger = LogManager.getLogger("PeoplePage");
@@ -20,6 +26,7 @@ public class PeoplePage extends AtriumBasePage {
 	private static By rowLocator = By.xpath("//tbody/tr");
 	private static By userFilterLocator = By.id("edit-name");
 	private static By applyLocator = By.id("edit-submit-admin-views-user");
+	private static By executeLocator = By.id("edit-submit--2");
 
 	public PeoplePage(WebDriver driver) {
 		super(driver);
@@ -36,7 +43,6 @@ public class PeoplePage extends AtriumBasePage {
 
 		WebElement table = driver.findElement(tableLocator);
 		List<WebElement> rows = table.findElements(rowLocator);
-		logger.debug("*** rows size = " + rows.size());
 		WebElement row1 = rows.get(0);
 		if (!row1.getText().contains("No users available.")) {
 
@@ -61,11 +67,18 @@ public class PeoplePage extends AtriumBasePage {
 
 		WebElement applyButton = driver.findElement(applyLocator);
 		applyButton.click();
-		Thread.sleep(3000);
+		waitForPageLoaded();
 
 		return this;
 	}
 
+	public PeoplePage selectExecute() {
+		WebElement executeButton = driver.findElement(executeLocator);
+		executeButton.click();
+		
+		return this;
+	}
+	
 	private UserInfo parseUserRow(WebElement row) {
 
 		List<WebElement> cells = row.findElements(By.tagName("td"));
