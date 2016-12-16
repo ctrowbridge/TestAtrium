@@ -17,6 +17,7 @@ public class UserInfo {
 	private String email;
 	private Roles role;
 	private Status status;
+	private String password;
 	
 	public UserInfo() {
 		username = "";
@@ -26,6 +27,19 @@ public class UserInfo {
 		email = "";
 		role = Roles.EDITOR;
 		status = Status.ACTIVE;
+		password = "";
+	}
+	
+	public UserInfo(String username, String password) {
+
+		this.username = username;
+		displayName = "";
+		picture = "";
+		about = "";
+		email = "";
+		role = Roles.EDITOR;
+		status = Status.ACTIVE;
+		this.password = password;
 	}
 	
 	public String getUsername() {
@@ -69,6 +83,14 @@ public class UserInfo {
 	}
 	public void setStatus(Status status) {
 		this.status = status;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 	
