@@ -31,6 +31,13 @@ public abstract class AtriumBasePage extends BasePage {
 	protected By breadcrumbLocator = By.id("breadcrumb");
 	protected By pageTitleLocator = By.id("page-title");
 	protected By homeLocator = By.cssSelector("img.oa-site-banner-img");
+	protected By userMenuLocator = By.id("user-badge-dropdown");
+	protected By dashboardLocator = By.linkText("Dashboard");
+	protected By settingsLocator = By.linkText("Settings");
+	protected By editProfileLocator = By.linkText("Edit profile");
+	protected By logoutLocator = By.linkText("Log out");
+	protected By toolBarLocator = By.id("mini-panel-oa_toolbar_modern_panel");
+	protected By closeButtonLocator = By.className("close");
 	
 	public AtriumBasePage(WebDriver driver) {
 		super(driver);
@@ -60,53 +67,53 @@ public abstract class AtriumBasePage extends BasePage {
 
 	public DashboardPage selectUserDashboard() throws InterruptedException {
 
-		WebElement menuButton = driver.findElement(By.id("user-badge-dropdown"));
+		WebElement menuButton = driver.findElement(userMenuLocator);
 
 		Actions builder = new Actions(driver);
 		builder.moveToElement(menuButton).perform();
 
-		WebElement dashboardButton = driver.findElement(By.linkText("Dashboard"));
+		WebElement dashboardButton = driver.findElement(dashboardLocator);
 		dashboardButton.click();
 
-		waitForElement(By.id("page-title"));
+		waitForElement(pageTitleLocator);
 
 		return new DashboardPage(driver);
 	}
 
 	public SettingsPage selectUserSettings() throws InterruptedException {
 
-		WebElement menuButton = driver.findElement(By.id("user-badge-dropdown"));
+		WebElement menuButton = driver.findElement(userMenuLocator);
 
 		Actions builder = new Actions(driver);
 		builder.moveToElement(menuButton).perform();
 
-		WebElement dashboardButton = driver.findElement(By.linkText("Settings"));
+		WebElement dashboardButton = driver.findElement(settingsLocator);
 		dashboardButton.click();
 
-		waitForElement(By.id("page-title"));
+		waitForElement(pageTitleLocator);
 
 		return new SettingsPage(driver);
 	}
 
 	public ProfileAccountPage selectUserProfile() throws InterruptedException {
 
-		WebElement menuButton = driver.findElement(By.id("user-badge-dropdown"));
+		WebElement menuButton = driver.findElement(userMenuLocator);
 
 		Actions builder = new Actions(driver);
 		builder.moveToElement(menuButton).perform();
 
-		WebElement dashboardButton = driver.findElement(By.linkText("Edit profile"));
+		WebElement dashboardButton = driver.findElement(editProfileLocator);
 		dashboardButton.click();
 
-		waitForElement(By.id("page-title"));
+		waitForElement(pageTitleLocator);
 
 		return new ProfileAccountPage(driver);
 	}
 
 	public String getPageTitle() {
 
-		if (isElementPresent(By.id("page-title"))) {
-			WebElement pageTitle = driver.findElement(By.id("page-title"));
+		if (isElementPresent(pageTitleLocator)) {
+			WebElement pageTitle = driver.findElement(pageTitleLocator);
 			return pageTitle.getText();
 		}
 		return "Unknown";
@@ -114,15 +121,15 @@ public abstract class AtriumBasePage extends BasePage {
 
 	public LoginPage logout() throws InterruptedException {
 
-		WebElement menuButton = driver.findElement(By.id("user-badge-dropdown"));
+		WebElement menuButton = driver.findElement(userMenuLocator);
 
 		Actions builder = new Actions(driver);
 		builder.moveToElement(menuButton).perform();
 
-		WebElement dashboardButton = driver.findElement(By.linkText("Log out"));
+		WebElement dashboardButton = driver.findElement(logoutLocator);
 		dashboardButton.click();
 
-		waitForElement(By.id("mini-panel-oa_toolbar_modern_panel"));
+		waitForElement(toolBarLocator);
 
 		return new LoginPage(driver);
 	}
@@ -143,7 +150,6 @@ public abstract class AtriumBasePage extends BasePage {
 
 			message = errorMessage.getAttribute("innerHTML");
 			if (message.contains("<ul>")) {
-
 				message = message.substring(message.lastIndexOf("<ul>") + 1, message.length());
 				message = message.replace("</ul>", "");
 			} else {
@@ -155,8 +161,8 @@ public abstract class AtriumBasePage extends BasePage {
 
 	public boolean closeErrorMessage() {
 
-		if (isElementPresent(By.className("close"))) {
-			WebElement closeButton = driver.findElement(By.className("close"));
+		if (isElementPresent(closeButtonLocator)) {
+			WebElement closeButton = driver.findElement(closeButtonLocator);
 			closeButton.click();
 			return true;
 		}
@@ -164,6 +170,7 @@ public abstract class AtriumBasePage extends BasePage {
 	}
 
 	public String getBreadcrumbs() {
+		
 		String breadcrumbs = "";
 		if (isElementPresent(breadcrumbLocator)) {
 			WebElement breadcrumbDiv = driver.findElement(breadcrumbLocator);

@@ -16,6 +16,12 @@ import com.cindy.testatrium.data.UserSettings.EmailPref;
  */
 public class SettingsPage extends AtriumBasePage {
 
+	private static By emailPlainTextLocator = By.id("edit-oa-messages-delivery-email-type-0");
+	private static By emailHtmlLocator = By.id("edit-oa-messages-delivery-email-type-1");
+	private static By groupOneDigestLocator = By.id("edit-oa-messages-delivery-digest-grouping-group");
+	private static By groupCombinedDigestLocator = By.id("edit-oa-messages-delivery-digest-grouping-global");
+	private static By submitButtonLocator = By.id("edit-submit-top");
+	
 	public SettingsPage(WebDriver driver) {
 		super(driver);
 	}
@@ -29,8 +35,8 @@ public class SettingsPage extends AtriumBasePage {
 		
 		UserSettings userSettings = new UserSettings();
 		
-		WebElement email0 = driver.findElement(By.id("edit-oa-messages-delivery-email-type-0"));
-		//WebElement email1 = driver.findElement(By.id("edit-oa-messages-delivery-email-type-1"));
+		WebElement email0 = driver.findElement(emailPlainTextLocator);
+		//WebElement email1 = driver.findElement(emailHtmlLocator);
 		
 		if (email0.isSelected()) {
 			userSettings.setEmailPref(EmailPref.PLAIN_TEXT);
@@ -38,8 +44,8 @@ public class SettingsPage extends AtriumBasePage {
 			userSettings.setEmailPref(EmailPref.HTML);
 		}
 		
-		WebElement digest0 = driver.findElement(By.id("edit-oa-messages-delivery-digest-grouping-group"));
-		//WebElement digest1 = driver.findElement(By.id("edit-oa-messages-delivery-digest-grouping-global"));
+		WebElement digest0 = driver.findElement(groupOneDigestLocator);
+		//WebElement digest1 = driver.findElement(groupCombinedDigestLocator);
 		
 		if (digest0.isSelected()) {
 			userSettings.setDigestPref(DigestGroupingPref.ONE_DIGEST);
@@ -60,20 +66,22 @@ public class SettingsPage extends AtriumBasePage {
 	 */
 	public SettingsPage updateSettings(UserSettings toSettings) throws InterruptedException {
 		
+		// Update settings
+		//
 		if (toSettings.getEmailPref() == EmailPref.HTML) {
-			WebElement email1 = driver.findElement(By.id("edit-oa-messages-delivery-email-type-1"));
+			WebElement email1 = driver.findElement(emailHtmlLocator);
 			email1.click();
 		} else {
-			WebElement email0 = driver.findElement(By.id("edit-oa-messages-delivery-email-type-0"));
+			WebElement email0 = driver.findElement(emailPlainTextLocator);
 			email0.click();
 		}
 		
 		if (toSettings.getDigestPref() == DigestGroupingPref.COMBINED_DIGEST) {
 
-			WebElement digest1 = driver.findElement(By.id("edit-oa-messages-delivery-digest-grouping-global"));
+			WebElement digest1 = driver.findElement(groupCombinedDigestLocator);
 			digest1.click();
 		} else {
-			WebElement digest0 = driver.findElement(By.id("edit-oa-messages-delivery-digest-grouping-group"));
+			WebElement digest0 = driver.findElement(submitButtonLocator);
 			digest0.click();
 		}
 		
@@ -83,9 +91,10 @@ public class SettingsPage extends AtriumBasePage {
 		saveButton.click();
 		
 		// Wait for changes to take effect
+		// TODO Fix the first locator
 		//
 		waitForElement(By.xpath("html/body/div[2]/div/div[3]/section/div/div[1]/div/div[1]/div/div"));
-		WebElement closeButton = driver.findElement(By.className("close"));
+		WebElement closeButton = driver.findElement(closeButtonLocator);
 		closeButton.click();
 		
 		return this;

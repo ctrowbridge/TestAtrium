@@ -25,6 +25,7 @@ public class LoginPage extends AtriumBasePage {
 	private By searchFieldLocator = By.name("search_text");
 	private By searchFieldButtonLocator = By.xpath("//button[@type='submit']");
 	private By searchLabelLocator = By.xpath("//div[@id='edit-basic']/div/label");
+	private By siteMapTopLocator = By.id("oa-sitemap-top");
 	
 	public LoginPage(WebDriver driver) {
 		super(driver);
@@ -36,7 +37,7 @@ public class LoginPage extends AtriumBasePage {
 
 		driver.get(url);
 
-		waitForElement(By.id("mini-panel-oa_toolbar_modern_panel"));
+		waitForElement(toolBarLocator);
 
 		return this;
 	}
@@ -55,7 +56,7 @@ public class LoginPage extends AtriumBasePage {
 		WebElement siteMapButton = driver.findElement(siteMapLocator);
 		siteMapButton.click();
 
-		waitForElement(By.id("oa-sitemap-top"));
+		waitForElement(siteMapTopLocator);
 
 		return new SiteMapPage(driver);
 	}
@@ -66,7 +67,6 @@ public class LoginPage extends AtriumBasePage {
 
 		return new HomePage(driver);
 	}
-	
 	
 	public HomePage login(String user, String password) {
 

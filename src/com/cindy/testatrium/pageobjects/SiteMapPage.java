@@ -13,26 +13,23 @@ public class SiteMapPage extends AtriumBasePage {
 
 	private By newSpaceLocator = By.className("oa-subspace-icon");
 	private By newSpaceTitleLocator = By.id("modal-title");
+	private By headerLocator = By.tagName("h2");
 	
 	public SiteMapPage(WebDriver driver) {
 		super(driver);
 	}
 	
 	public String getHeader() {
-		WebElement header = driver.findElement(By.tagName("h2"));
+		WebElement header = driver.findElement(headerLocator);
 		return header.getText();
 	}
 	
-	public AddNewSpacePage selectNewSpace() {
+	public AddNewSpacePage selectNewSpace() throws InterruptedException {
 		WebElement newSpaceButton = driver.findElement(newSpaceLocator);
 		newSpaceButton.click();
 		
-		waitForElementnewSpaceTitleLocator();
+		waitForElement(newSpaceTitleLocator);
 		return new AddNewSpacePage(driver);
 	}
 
-	private void waitForElementnewSpaceTitleLocator() {
-		// TODO Auto-generated method stub
-		
-	}
 }
