@@ -1,5 +1,7 @@
 package com.cindy.testatrium.testusecases;
 
+import java.io.IOException;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.Assert;
@@ -8,8 +10,12 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.cindy.SeleniumCommon.BaseTestCase.DriverType;
+import com.cindy.testatrium.data.UserInfo;
+import com.cindy.testatrium.data.UserInfo.Status;
+import com.cindy.testatrium.pageobjects.AddUserPage;
 import com.cindy.testatrium.pageobjects.AdminPage;
 import com.cindy.testatrium.pageobjects.HomePage;
+import com.cindy.testatrium.pageobjects.PeoplePage;
 import com.cindy.testatrium.testcases.AtriumBaseTestCase;
 
 /**
@@ -34,6 +40,8 @@ public class AddUserTest extends AtriumBaseTestCase {
 	
 	HomePage homePage;
 	AdminPage adminPage;
+	PeoplePage peoplePage;
+	AddUserPage addUserPage;
 	
 	@BeforeClass
 	public void beforeClass() {
@@ -42,14 +50,18 @@ public class AddUserTest extends AtriumBaseTestCase {
 	}
 	
 	@Test
-	public void testAddUser() throws InterruptedException {
+	public void testAddUser() throws InterruptedException, IOException {
 		openLoginPage();
 		login();
+		openAdminPage();
+		selectAddNewUser();
+		addNewUser();
 	}
 	
 	private void login() {
 		logger.info("Login in to site ...");
 		homePage = loginPage.login(mainUser);
+		logger.info(" homePage = " + homePage);
 	}
 	
 	private void openAdminPage() throws InterruptedException {
@@ -61,7 +73,30 @@ public class AddUserTest extends AtriumBaseTestCase {
 		String title = adminPage.getTitle();
 		logger.info(" title = " + title);
 		String header = adminPage.getHeader();
+	}
+	
+	private void selectAddNewUser() throws InterruptedException {
+		logger.info("Select Add New User ...");
+		peoplePage = adminPage.selectPeoplePage();
+		logger.info(" peoplePage = " + peoplePage);
+		addUserPage = peoplePage.selectAddUser();
+		logger.info(" addUserPage = " + addUserPage);
 		
+	}
+	
+	private void addNewUser() throws IOException {
+		
+		logger.info("Add new user ...");
+		
+		UserInfo newUser = new UserInfo();
+		int userCounter = getUserCounter();
+		String userName = String.format("user%03d", userCounter);
+		logger.info(" username = " + userName);
+		newUser.setUsername(userName);
+		newUser.setEmail(userName + "@dummy.com");
+		newUser.setStatus(Status.ACTIVE);
+		newUser.setPassword("password");
+		newUser.setDisplayName(userName);
 	}
 	
 	@AfterClass

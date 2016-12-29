@@ -27,6 +27,8 @@ public class PeoplePage extends AtriumBasePage {
 	private static By userFilterLocator = By.id("edit-name");
 	private static By applyLocator = By.id("edit-submit-admin-views-user");
 	private static By executeLocator = By.id("edit-submit--2");
+	private static By addUserLocator = By.linkText("Add user");
+	private static By editNameLocator = By.id("edit-name");
 
 	public PeoplePage(WebDriver driver) {
 		super(driver);
@@ -77,6 +79,15 @@ public class PeoplePage extends AtriumBasePage {
 		executeButton.click();
 		
 		return this;
+	}
+	
+	public AddUserPage selectAddUser() throws InterruptedException {
+		
+		WebElement addUserButton = driver.findElement(addUserLocator);
+		addUserButton.click();
+		waitForElement(editNameLocator);
+		
+		return new AddUserPage(driver);
 	}
 	
 	private UserInfo parseUserRow(WebElement row) {

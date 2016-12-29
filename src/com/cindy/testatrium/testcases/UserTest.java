@@ -7,6 +7,7 @@ import com.cindy.testatrium.data.Topic;
 import com.cindy.testatrium.data.UserSettings;
 import com.cindy.testatrium.data.UserSettings.DigestGroupingPref;
 import com.cindy.testatrium.data.UserSettings.EmailPref;
+import com.cindy.testatrium.pageobjects.AddUserPage;
 import com.cindy.testatrium.pageobjects.DashboardPage;
 import com.cindy.testatrium.pageobjects.HomePage;
 import com.cindy.testatrium.pageobjects.ProfileAccountPage;
@@ -34,6 +35,7 @@ public class UserTest extends AtriumBaseTestCase {
 	private SettingsPage settingsPage;
 	private ProfileUserInfoPage userInfoPage;
 	private ProfileAccountPage profileAccountPage;
+	private AddUserPage addUserPage;
 
 	private final String settingsTitle = "Notification Settings";
 	private final String profileAccountTitle = "Account Info";
@@ -41,6 +43,7 @@ public class UserTest extends AtriumBaseTestCase {
 	private final String displayErrorMessage = "Display Name field is required.";
 	private final String userErrorMessage = "Username field is required.";
 	private final String emailErrorMessage = "E-mail address field is required.";
+	private final String passwordErrorMessage = "Password field is required.";
 
 	private static final Logger logger = LogManager.getLogger("UserTest");
 
@@ -92,7 +95,7 @@ public class UserTest extends AtriumBaseTestCase {
 	 * 
 	 * @throws InterruptedException
 	 */
-	@Test
+	//@Test
 	public void testProfile() throws InterruptedException {
 
 		openLoginPage();
@@ -100,9 +103,18 @@ public class UserTest extends AtriumBaseTestCase {
 
 		openProfile();
 		checkProfile();
+		
 		logout();
 	}
 
+	@Test
+	public void testNewUser() throws InterruptedException {
+		openLoginPage();
+		login();
+		checkAddUser();
+		logout();
+	}
+	
 	private void login() {
 		logger.info("Login in to site ...");
 		homePage = loginPage.login(mainUser);
@@ -263,6 +275,24 @@ public class UserTest extends AtriumBaseTestCase {
 		profileAccountPage.closeErrorMessage();
 	}
 
+	private void checkAddUser() {
+		
+		logger.info("Check Adding a new User ...");
+		addUserPage = new AddUserPage(driver);
+		logger.info(" addUserPage = " + addUserPage);
+		addUserPage = addUserPage.open();
+		
+		// Check required fields
+		//
+		addUserPage = addUserPage.selectCreateNewAccount();
+		String errorMessage = addUserPage.getErrorMessage();
+		logger.info(" errorMessage = " + errorMessage);
+		Assert.assertTrue(errorMessage.contains(userErrorMessage));
+		Assert.assertTrue(errorMessage.contains(emailErrorMessage));
+		Assert.assertTrue(errorMessage.contains(passwordErrorMessage));
+		Assert.assertTrue(errorMessage.contains(displayErrorMessage));
+	}
+	
 	@AfterClass
 	public void afterClass() {
 

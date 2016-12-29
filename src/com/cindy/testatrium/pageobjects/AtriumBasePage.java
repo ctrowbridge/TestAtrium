@@ -145,8 +145,8 @@ public abstract class AtriumBasePage extends BasePage {
 		
 		if (isElementPresent(By.className("close"))) {
 			WebElement errorMessage = driver.findElement(errorLocator);
-			logger.debug(" errorMessage innerHTML = " + errorMessage.getAttribute("innerHTML"));
-			logger.debug(" errorMessage text      = " + errorMessage.getText());
+			//logger.debug(" errorMessage innerHTML = " + errorMessage.getAttribute("innerHTML"));
+			//logger.debug(" errorMessage text      = " + errorMessage.getText());
 
 			message = errorMessage.getAttribute("innerHTML");
 			if (message.contains("<ul>")) {
