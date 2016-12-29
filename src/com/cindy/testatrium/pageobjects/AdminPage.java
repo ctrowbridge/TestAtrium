@@ -40,6 +40,15 @@ public class AdminPage extends AtriumBasePage {
 		return this;
 	}
 	
+	public AdminPage openNotAuthorized() throws InterruptedException {
+
+		driver.get(url);
+
+		waitForElement(pageTitleLocator);
+
+		return this;
+	}
+	
 	public List<String> getTasks() {
 		
 		List<String> taskList = new ArrayList<String>();

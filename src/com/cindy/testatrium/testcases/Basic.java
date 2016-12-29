@@ -1,5 +1,6 @@
 package com.cindy.testatrium.testcases;
 
+import com.cindy.testatrium.pageobjects.AdminPage;
 import com.cindy.testatrium.pageobjects.SearchResultsPage;
 import com.cindy.testatrium.pageobjects.SiteMapPage;
 import com.cindy.SeleniumCommon.BaseUtils;
@@ -26,11 +27,13 @@ public class Basic extends AtriumBaseTestCase {
 	 */
 	private final String siteTitle = "Cindy's Site";
 	private final String siteHeader = "SITE MAP FOR " + siteTitle.toUpperCase();
+	private final String adminHeader = "Access Denied";
 	
 	private static final Logger logger = LogManager.getLogger("Basic");
 	
 	SiteMapPage siteMapPage;
 	SearchResultsPage searchResultsPage;
+	AdminPage adminPage;
 	
 	@BeforeClass
 	public void beforeClass() {
@@ -51,6 +54,7 @@ public class Basic extends AtriumBaseTestCase {
 		openLoginPage();
 		checkLoginPage();
 		openSiteMapPage();
+		openAdminPage();
 	}
 	
 	private void checkLoginPage() throws InterruptedException {
@@ -104,6 +108,23 @@ public class Basic extends AtriumBaseTestCase {
 		Assert.assertEquals(header, siteHeader);
 		loginPage = siteMapPage.selectHome();
 		
+	}
+	
+	/**
+	 * Opens the Admin page. Note that an "Access Denied" page should appear
+	 * since the user isn't logged in.
+	 * 
+	 * @throws InterruptedException
+	 */
+	private void openAdminPage() throws InterruptedException {
+		logger.info("Open Admin Page ...");
+		adminPage = new AdminPage(driver);
+		adminPage.openNotAuthorized();
+		String header = adminPage.getHeader();
+		logger.info(" header = " + header);
+		Assert.assertEquals(header, adminHeader);
+		
+		loginPage = adminPage.selectHome();
 	}
 	
 	@AfterClass
