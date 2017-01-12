@@ -56,6 +56,7 @@ public class AddUserTest extends AtriumBaseTestCase {
 		openAdminPage();
 		selectAddNewUser();
 		addNewUser();
+		checkNewUser();
 	}
 	
 	private void login() {
@@ -73,9 +74,11 @@ public class AddUserTest extends AtriumBaseTestCase {
 		String title = adminPage.getTitle();
 		logger.info(" title = " + title);
 		String header = adminPage.getHeader();
+		logger.info(" header = " + header);
 	}
 	
 	private void selectAddNewUser() throws InterruptedException {
+		
 		logger.info("Select Add New User ...");
 		peoplePage = adminPage.selectPeoplePage();
 		logger.info(" peoplePage = " + peoplePage);
@@ -90,6 +93,7 @@ public class AddUserTest extends AtriumBaseTestCase {
 		
 		UserInfo newUser = new UserInfo();
 		int userCounter = getUserCounter();
+		updateUserCounter();
 		String userName = String.format("user%03d", userCounter);
 		logger.info(" username = " + userName);
 		newUser.setUsername(userName);
@@ -97,6 +101,14 @@ public class AddUserTest extends AtriumBaseTestCase {
 		newUser.setStatus(Status.ACTIVE);
 		newUser.setPassword("password");
 		newUser.setDisplayName(userName);
+		
+		addUserPage = addUserPage.addUser(newUser);
+		String errorMessage = addUserPage.getErrorMessage();
+		logger.info(" errorMessage = " + errorMessage);
+	}
+	
+	private void checkNewUser() {
+		
 	}
 	
 	@AfterClass

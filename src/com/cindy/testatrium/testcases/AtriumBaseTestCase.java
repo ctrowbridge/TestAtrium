@@ -56,22 +56,27 @@ public abstract class AtriumBaseTestCase extends BaseTestCase {
 			FileReader fr = new FileReader(userCounterFileName);
 			BufferedReader br = new BufferedReader(fr);
 			String count = br.readLine();
-			counter = Integer.parseInt(count);
+			if (count != " ") {
+				counter = Integer.parseInt(count);
+			}
 		} else {
-			FileWriter fw = new FileWriter(userCounterFileName);
-			BufferedWriter bw = new BufferedWriter(fw);
-			bw.write(counter);
-			bw.close();
-			fw.close();
+			writeCount(counter);
 		}
 		return counter;
 	}
 	
 	protected void updateUserCounter() throws IOException {
 		int counter = getUserCounter() + 1;
+		writeCount(counter);
+	}
+	
+	private void writeCount(int counter) throws IOException {
+		
 		FileWriter fw = new FileWriter(userCounterFileName);
 		BufferedWriter bw = new BufferedWriter(fw);
-		bw.write(counter);
+		String countStr = Integer.toString(counter);
+		bw.write(countStr);
+		bw.write("\n");
 		bw.close();
 		fw.close();
 	}
