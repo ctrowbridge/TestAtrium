@@ -59,6 +59,7 @@ public abstract class AtriumBaseTestCase extends BaseTestCase {
 			if (count != " ") {
 				counter = Integer.parseInt(count);
 			}
+			br.close();
 		} else {
 			writeCount(counter);
 		}
