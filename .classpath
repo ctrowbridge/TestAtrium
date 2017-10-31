@@ -8,5 +8,14 @@
 	<classpathentry kind="lib" path="C:/Users/Cindy/Documents/Selenium/workspace/TestAtrium/lib/log4j-core-2.4.1.jar"/>
 	<classpathentry kind="lib" path="lib/client-combined-3.5.3-nodeps.jar"/>
 	<classpathentry kind="lib" path="lib/selenium-server-standalone-3.5.3.jar"/>
+	<classpathentry kind="lib" path="lib/cobertura-1.9.4.1.jar"/>
+	<classpathentry kind="lib" path="lib/cucumber-core-1.2.5.jar"/>
+	<classpathentry kind="lib" path="lib/cucumber-html-0.2.3.jar"/>
+	<classpathentry kind="lib" path="lib/cucumber-java-1.2.5.jar"/>
+	<classpathentry kind="lib" path="lib/cucumber-junit-1.2.5.jar"/>
+	<classpathentry kind="lib" path="lib/cucumber-jvm-deps-1.0.5.jar"/>
+	<classpathentry kind="lib" path="lib/cucumber-testng-1.2.5.jar"/>
+	<classpathentry kind="lib" path="lib/gherkin-2.12.2.jar"/>
+	<classpathentry kind="lib" path="lib/mockito-all-1.10.19.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

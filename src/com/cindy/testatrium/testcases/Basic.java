@@ -17,8 +17,10 @@ import org.testng.annotations.AfterClass;
  * Contains some basic tests for Atrium that can be run without logging
  * in.
  * 
+ * @deprecated Replaced by "basic.feature"
  * @author Cindy
  */
+@Deprecated
 public class Basic extends AtriumBaseTestCase {
 
 	/**
@@ -107,7 +109,6 @@ public class Basic extends AtriumBaseTestCase {
 		Assert.assertEquals(siteMapTitle, siteTitle);
 		Assert.assertEquals(header, siteHeader);
 		loginPage = siteMapPage.selectHome();
-		
 	}
 	
 	/**

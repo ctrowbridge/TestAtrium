@@ -56,7 +56,7 @@ public class UserTest extends AtriumBaseTestCase {
 	 * 
 	 * @throws InterruptedException
 	 */
-	// @Test
+	@Test
 	public void testUserDashboard() throws InterruptedException {
 
 		openLoginPage();
@@ -76,7 +76,7 @@ public class UserTest extends AtriumBaseTestCase {
 	 * 
 	 * @throws InterruptedException
 	 */
-	// @Test
+	//@Test
 	public void testSettings() throws InterruptedException {
 
 		openLoginPage();
