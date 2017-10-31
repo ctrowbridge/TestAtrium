@@ -3,13 +3,10 @@ package com.cindy.testatrium.pageobjects;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.cindy.testatrium.data.AccountInfo.Status;
 import com.cindy.testatrium.data.UserInfo;
 
 /**
@@ -18,10 +15,10 @@ import com.cindy.testatrium.data.UserInfo;
  * 
  * @author Cindy
  */
-public class PeoplePage extends AtriumBasePage {
+public class PeoplePage extends AdminBasePage {
 
-	private static final Logger logger = LogManager.getLogger("PeoplePage");
-
+	private static final String pageTitle = "People";
+	
 	private static By tableLocator = By.xpath("//div[@class='table-responsive']/table[2]");
 	private static By rowLocator = By.xpath("//tbody/tr");
 	private static By userFilterLocator = By.id("edit-name");
@@ -34,6 +31,12 @@ public class PeoplePage extends AtriumBasePage {
 		super(driver);
 	}
 
+	public boolean isPeoplePage() {
+		
+		WebElement title = driver.findElement(pageTitleLink);
+		return title.getText().equals(pageTitle);
+	}
+	
 	/**
 	 * Retrieves a list of people from the People Page.
 	 * 
@@ -93,10 +96,6 @@ public class PeoplePage extends AtriumBasePage {
 	private UserInfo parseUserRow(WebElement row) {
 
 		List<WebElement> cells = row.findElements(By.tagName("td"));
-		// for (WebElement cell : cells) {
-		// logger.debug("*** cell text = " + cell.getText());
-		// }
-
 		UserInfo user = new UserInfo();
 
 		WebElement nameCell = cells.get(1);

@@ -1,4 +1,7 @@
+# Author:  Cindy Trowbridge
+
 Feature: Basic tests
+# Tests which can be performed without the user being logged in
 
 	Scenario:  Basic Test
 		Given I open a browser
@@ -12,7 +15,6 @@ Feature: Basic tests
 		And I search for "hello"
 		Then I see the Search Results page
 
-@wip	
 		Scenario:  Site Map
 		Given I open a browser
 		When I open Login page

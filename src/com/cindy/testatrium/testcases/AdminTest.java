@@ -14,14 +14,17 @@ import com.cindy.testatrium.pageobjects.AdminPage;
 import com.cindy.testatrium.pageobjects.HomePage;
 import com.cindy.testatrium.pageobjects.PeoplePage;
 import com.cindy.testatrium.pageobjects.ReportsPage;
+import com.cindy.testatrium.data.Task;
 import com.cindy.testatrium.data.UserInfo;
 
 
 /**
  * Contains various tests for admin functionality.
  * 
+ * @deprecated Replaced by "admin.feature"
  * @author Cindy
  */
+@Deprecated
 public class AdminTest extends AtriumBaseTestCase {
 
 	private static final Logger logger = LogManager.getLogger("AdminTest");
@@ -85,8 +88,8 @@ public class AdminTest extends AtriumBaseTestCase {
 	
 	private void checkTasks() {
 		logger.info("Get list of tasks ...");
-		List<String> tasks = adminPage.getTasks();
-		for (String task : tasks) {
+		List<Task> tasks = adminPage.getTasks();
+		for (Task task : tasks) {
 			logger.info(" task = " + task);
 		}
 	}

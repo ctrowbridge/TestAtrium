@@ -7,20 +7,21 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import com.cindy.testatrium.data.Task;
+
 /**
  * Page Object representing the Admin page.  The Admin Page contains a
  * list of administrative tasks.
  * 
  * @author Cindy
- *
  */
-public class AdminPage extends AtriumBasePage {
+public class AdminPage extends AdminBasePage {
 
 	String url = "http://127.0.0.1/openatrium/admin";
 	
+	private static final String pageTitle = "Administration";
+	
 	private static By navbarLocator = By.id("navbar-administration");
-	private static By taskDivLocator = By.id("block-system-main");
-	private static By taskLinkLocator = By.tagName("a");
 	private static By tasksTabLocator = By.partialLinkText("Tasks");
 	private static By indexTabLocator = By.partialLinkText("Index");
 	private static By reportLinkLocator = By.linkText("Reports");
@@ -49,17 +50,41 @@ public class AdminPage extends AtriumBasePage {
 		return this;
 	}
 	
-	public List<String> getTasks() {
+	public boolean isAdminPage() {
 		
-		List<String> taskList = new ArrayList<String>();
+		WebElement title = driver.findElement(pageTitleLink);
+		System.out.println("*** title = " + title.getText());
+		return title.getText().equals(pageTitle);
+	}
+	
+	/**
+	 * Returns the list of tasks present on the Task tab of the Admin page.
+	 * @return
+	 */
+	public List<Task> getTasks() {
+		
+		List<Task> taskList = new ArrayList<Task>();
 		
 		WebElement taskContainer = driver.findElement(taskDivLocator);
 		List<WebElement> tasks = taskContainer.findElements(taskLinkLocator);
 		for (WebElement task : tasks) {
-			taskList.add(task.getText());
+			Task oneTask = new Task(task.getText(), task);
+			taskList.add(oneTask);
+		}
+		return taskList;
+	}
+
+	public boolean tabExists(String tabName) {
+		
+		if (tabName.equals("Tasks")) {
+			return isElementPresent(tasksTabLocator);
+			
+		}
+		if (tabName.equals("Index")) {
+			return isElementPresent(indexTabLocator);
 		}
 		
-		return taskList;
+		return false;
 	}
 	
 	public AdminPage selectTaskView() {
@@ -91,4 +116,7 @@ public class AdminPage extends AtriumBasePage {
 		
 		return new PeoplePage(driver);
 	}
+	
+
+
 }
