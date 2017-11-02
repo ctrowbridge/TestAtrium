@@ -170,6 +170,7 @@ public class UserTest extends AtriumBaseTestCase {
 	}
 
 	private void checkSettings() throws InterruptedException {
+		
 		logger.info("Check delivery preferences ...");
 		UserSettings expectedSettings = new UserSettings(EmailPref.HTML, DigestGroupingPref.ONE_DIGEST);
 		UserSettings userSettings = settingsPage.getUserSettings();

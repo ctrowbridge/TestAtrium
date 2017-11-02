@@ -2,6 +2,7 @@ package com.cindy.testatrium.steps;
 
 import org.testng.Assert;
 
+import com.cindy.SeleniumCommon.BaseUtils;
 import com.cindy.testatrium.data.UserInfo;
 import com.cindy.testatrium.pageobjects.AdminPage;
 import com.cindy.testatrium.pageobjects.LoginPage;
@@ -107,5 +108,14 @@ public class StepDefs extends BaseStepDefs {
 		}
 	}
 	
-
+	@Then("^Documentation URL is valid$")
+	public void documentation_URL_is_valid() throws Throwable {
+		
+		logger.info("Check documentation URL ...");
+		String url = loginPage.getDocumentationURL();
+		logger.info(" url = " + url);
+		boolean urlOk = BaseUtils.checkURL(url);
+		logger.info(" urlOK = " + urlOk);
+		Assert.assertTrue(urlOk);
+	}
 }

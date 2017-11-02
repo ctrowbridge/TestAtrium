@@ -52,6 +52,28 @@ public class UserSettings {
 		return "UserSettings [emailPref=" + emailPref + ", digestPref=" + digestPref + "]";
 	}
 
+	public String emailPrefToString() {
+		
+		switch(emailPref) {
+		case PLAIN_TEXT:
+			return "Plain text";
+		case HTML:
+			return "HTML";
+		}
+		return "";
+	}
+	
+	public String digestPrefToString() {
+		
+		switch(digestPref) {
+		case COMBINED_DIGEST:
+			return "Combined digest";
+		case ONE_DIGEST:
+			return "One digest";
+		}
+		return "";
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

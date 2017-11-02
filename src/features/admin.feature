@@ -3,8 +3,12 @@
 Feature:  Test Admin Page
 # Tests for the Administration page
 
-	@wip
-  Scenario:  Basic Page
+  Scenario:  Admin page not authorized
+		Given I open a browser
+		When I open Admin page while user isn't logged in
+		Then I see Not Authorized message
+		
+  Scenario:  Admin page check
   	Given I open a browser
 		When  I open Login page
 		And   I login as admin user

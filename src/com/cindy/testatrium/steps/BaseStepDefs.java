@@ -11,6 +11,7 @@ import com.cindy.testatrium.pageobjects.LoginPage;
 import com.cindy.testatrium.pageobjects.PeoplePage;
 import com.cindy.testatrium.pageobjects.ReportsPage;
 import com.cindy.testatrium.pageobjects.SearchResultsPage;
+import com.cindy.testatrium.pageobjects.SettingsPage;
 import com.cindy.testatrium.pageobjects.SiteMapPage;
 
 import cucumber.api.java.After;
@@ -46,9 +47,9 @@ public class BaseStepDefs {
 	protected static HomePage homePage = null;
 	protected static ReportsPage reportsPage = null;
 	protected static PeoplePage peoplePage = null;
+	protected static SettingsPage settingsPage = null;
 	
 	public BaseStepDefs() {
 		super();
 	}
-	
 }

@@ -16,6 +16,9 @@ import com.cindy.testatrium.data.UserSettings.EmailPref;
  */
 public class SettingsPage extends AtriumBasePage {
 
+	private static final String pageTitle = "Notification Settings";
+	
+	private static By pageTitleLink = By.id("page-title");
 	private static By emailPlainTextLocator = By.id("edit-oa-messages-delivery-email-type-0");
 	private static By emailHtmlLocator = By.id("edit-oa-messages-delivery-email-type-1");
 	private static By groupOneDigestLocator = By.id("edit-oa-messages-delivery-digest-grouping-group");
@@ -26,6 +29,12 @@ public class SettingsPage extends AtriumBasePage {
 		super(driver);
 	}
 
+	public boolean isSettingsPage() {
+		
+		WebElement title = driver.findElement(pageTitleLink);
+		return title.getText().equals(pageTitle);
+	}
+	
 	/**
 	 * Retrieves the current settings for this page
 	 * 
@@ -66,27 +75,39 @@ public class SettingsPage extends AtriumBasePage {
 	 */
 	public SettingsPage updateSettings(UserSettings toSettings) throws InterruptedException {
 		
-		// Update settings
-		//
-		if (toSettings.getEmailPref() == EmailPref.HTML) {
+		setEmailPreference(toSettings.getEmailPref());
+		setDigestPreference(toSettings.getDigestPref());
+		selectSave();
+		
+		return this;
+	}
+	
+	public SettingsPage setEmailPreference(EmailPref pref) {
+		
+		if (pref == EmailPref.HTML) {
 			WebElement email1 = driver.findElement(emailHtmlLocator);
 			email1.click();
 		} else {
 			WebElement email0 = driver.findElement(emailPlainTextLocator);
 			email0.click();
 		}
+		return this;
+	}
+	
+	public SettingsPage setDigestPreference(DigestGroupingPref pref) {
 		
-		if (toSettings.getDigestPref() == DigestGroupingPref.COMBINED_DIGEST) {
-
+		if (pref == DigestGroupingPref.COMBINED_DIGEST) {
 			WebElement digest1 = driver.findElement(groupCombinedDigestLocator);
 			digest1.click();
 		} else {
-			WebElement digest0 = driver.findElement(submitButtonLocator);
+			WebElement digest0 = driver.findElement(groupOneDigestLocator);
 			digest0.click();
 		}
+		return this;
+	}
+	
+	public SettingsPage selectSave() throws InterruptedException {
 		
-		// Save changes
-		//
 		WebElement saveButton = driver.findElement(By.id("edit-submit-top"));
 		saveButton.click();
 		
