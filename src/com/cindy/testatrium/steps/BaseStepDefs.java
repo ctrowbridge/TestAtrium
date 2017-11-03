@@ -5,7 +5,9 @@ import org.apache.logging.log4j.Logger;
 import org.testng.Assert;
 
 import com.cindy.testatrium.data.UserInfo;
+import com.cindy.testatrium.pageobjects.AddUserPage;
 import com.cindy.testatrium.pageobjects.AdminPage;
+import com.cindy.testatrium.pageobjects.DashboardPage;
 import com.cindy.testatrium.pageobjects.HomePage;
 import com.cindy.testatrium.pageobjects.LoginPage;
 import com.cindy.testatrium.pageobjects.PeoplePage;
@@ -48,6 +50,8 @@ public class BaseStepDefs {
 	protected static ReportsPage reportsPage = null;
 	protected static PeoplePage peoplePage = null;
 	protected static SettingsPage settingsPage = null;
+	protected static DashboardPage dashboardPage = null;
+	protected static AddUserPage addUserPage = null;
 	
 	public BaseStepDefs() {
 		super();

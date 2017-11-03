@@ -177,13 +177,14 @@ public class AdminStepDefs extends BaseStepDefs {
 		String title = peoplePage.getTitle();
 		logger.info(" title = " + title);
 		
-		logger.info("Get people ...");
+		logger.info("Display people ...");
 		List<UserInfo> people = peoplePage.getPeople();
 		logger.info(" people size = " + people.size());
 		for (UserInfo person : people) {
-			logger.info("  name    = " + person.getUsername());
-			logger.info("   email  = " + person.getEmail());
-			logger.info("   status = " + person.getStatus());
+			logger.info("  name          = " + person.getUsername());
+			logger.info("   email        = " + person.getEmail());
+			logger.info("   status       = " + person.getStatus());
+			logger.info("   display name = " + person.getDisplayName());
 		}
 	}
 

@@ -14,7 +14,7 @@ import com.cindy.testatrium.data.UserInfo;
  * 
  * @author Cindy
  */
-public class AddUserPage  extends AtriumBasePage {
+public class AddUserPage extends AtriumBasePage {
 
 	private final String url = "http://127.0.0.1/openatrium/admin/people/create";
 	
@@ -39,6 +39,11 @@ public class AddUserPage  extends AtriumBasePage {
 		driver.get(url);
 		waitForPageLoaded();
 		return this;
+	}
+	
+	public boolean isAddUserPage() {
+		
+		return isElementPresent(editNameLocator);
 	}
 	
 	public AddUserPage addUser(UserInfo newUser) {

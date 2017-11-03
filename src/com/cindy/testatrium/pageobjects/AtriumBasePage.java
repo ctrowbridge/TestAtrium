@@ -28,6 +28,7 @@ public abstract class AtriumBasePage extends BasePage {
 
 	protected By mainMenuButtonLocator = By.linkText("Recent Spaces");
 	protected By errorLocator = By.xpath("//div[@class='alert alert-danger alert-dismissable']");
+	protected By successLocator = By.xpath("//div[@class='alert alert-success alert-dismissable']");
 	protected By breadcrumbLocator = By.id("breadcrumb");
 	protected By pageTitleLocator = By.id("page-title");
 	protected By homeLocator = By.cssSelector("img.oa-site-banner-img");
@@ -38,7 +39,7 @@ public abstract class AtriumBasePage extends BasePage {
 	protected By logoutLocator = By.linkText("Log out");
 	protected By toolBarLocator = By.id("mini-panel-oa_toolbar_modern_panel");
 	protected By closeButtonLocator = By.className("close");
-	
+
 	public AtriumBasePage(WebDriver driver) {
 		super(driver);
 	}
@@ -142,18 +143,16 @@ public abstract class AtriumBasePage extends BasePage {
 	public String getErrorMessage() {
 
 		String message = "";
-		
-		if (isElementPresent(By.className("close"))) {
-			WebElement errorMessage = driver.findElement(errorLocator);
-			//logger.debug(" errorMessage innerHTML = " + errorMessage.getAttribute("innerHTML"));
-			//logger.debug(" errorMessage text      = " + errorMessage.getText());
 
-			message = errorMessage.getAttribute("innerHTML");
-			if (message.contains("<ul>")) {
-				message = message.substring(message.lastIndexOf("<ul>") + 1, message.length());
-				message = message.replace("</ul>", "");
-			} else {
-				message = message.substring(message.lastIndexOf('>') + 1, message.length());
+		if (isElementPresent(By.className("close"))) {
+			if (isElementPresent(errorLocator)) {
+				
+				WebElement errorMessage = driver.findElement(errorLocator);
+				message = parseMessage(errorMessage);
+			}
+			if (isElementPresent(successLocator)) {
+				WebElement successMessage = driver.findElement(successLocator);
+				message = parseMessage(successMessage);
 			}
 		}
 		return message;
@@ -170,7 +169,7 @@ public abstract class AtriumBasePage extends BasePage {
 	}
 
 	public String getBreadcrumbs() {
-		
+
 		String breadcrumbs = "";
 		if (isElementPresent(breadcrumbLocator)) {
 			WebElement breadcrumbDiv = driver.findElement(breadcrumbLocator);
@@ -186,5 +185,17 @@ public abstract class AtriumBasePage extends BasePage {
 			}
 		}
 		return breadcrumbs;
+	}
+	
+	private String parseMessage(WebElement messageDiv) {
+		
+		String message = messageDiv.getAttribute("innerHTML");
+		if (message.contains("<ul>")) {
+			message = message.substring(message.lastIndexOf("<ul>") + 1, message.length());
+			message = message.replace("</ul>", "");
+		} else {
+			message = message.substring(message.lastIndexOf('>') + 1, message.length());
+		}
+		return message;
 	}
 }

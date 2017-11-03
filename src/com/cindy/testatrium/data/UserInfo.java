@@ -1,5 +1,7 @@
 package com.cindy.testatrium.data;
 
+import org.openqa.selenium.WebElement;
+
 /**
  * Encapsulates the User info.
  * 
@@ -18,6 +20,7 @@ public class UserInfo {
 	private Roles role;
 	private Status status;
 	private String password;
+	private WebElement checkbox;
 	
 	public UserInfo() {
 		username = "";
@@ -40,6 +43,7 @@ public class UserInfo {
 		role = Roles.EDITOR;
 		status = Status.ACTIVE;
 		this.password = password;
+		checkbox = null;
 	}
 	
 	public String getUsername() {
@@ -88,10 +92,14 @@ public class UserInfo {
 	public String getPassword() {
 		return password;
 	}
-
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
+
+	public WebElement getCheckbox() {
+		return checkbox;
+	}
+	public void setCheckbox(WebElement checkbox) {
+		this.checkbox = checkbox;
+	}
 }

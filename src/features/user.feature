@@ -5,7 +5,6 @@ Feature: User Tests
     Given I open a browser
 		When I open Login page
 		
-	@wip
 	Scenario:  Settings
 	  Verify that the admin user can set notification settings and they persist after logging off then on again.
 		Given I login as admin user
@@ -30,4 +29,10 @@ Feature: User Tests
 		
 		When I set mail preference to "HTML"
 		And I set digest preference to "One digest"
+		
+	Scenario:  Dashboard
+		Given I login as admin user
+		When I select Dashboard from the user menu
+		Then I see the Dashboard page
+		
 		

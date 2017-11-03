@@ -76,6 +76,7 @@ public class UserTest extends AtriumBaseTestCase {
 	 * 
 	 * @throws InterruptedException
 	 */
+	@Deprecated
 	//@Test
 	public void testSettings() throws InterruptedException {
 
