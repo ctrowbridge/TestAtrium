@@ -46,5 +46,4 @@ public class AdminBasePage extends AtriumBasePage {
 	public boolean taskExists(String task) {
 		return isElementPresent(By.linkText(task));
 	}
-	
 }

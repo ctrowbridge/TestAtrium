@@ -17,6 +17,7 @@ public class HomePage extends AtriumBasePage {
 	private static final Logger logger = LogManager.getLogger("HomePage");
 	
 	private By createContentLocator = By.linkText("Create Content");
+	private By contentLocator = By.linkText("Content");
 	private By newSpaceLocator = By.className("oa-subspace oa-new-subspace");
 	private By menuButtonLocator = By.xpath("//div[@id='mini-panel-oa_toolbar_modern_panel']/div/div/div/div/div/div/div/span");
 	private By adminButtonLocator =  By.xpath("//div[@id='toolbar-menu-button']/i");
@@ -49,17 +50,7 @@ public class HomePage extends AtriumBasePage {
 	 */
 	public AddContentPage selectAddContentFromMenu() throws InterruptedException {
 		
-		logger.info("Click on << menu button ...");
-		WebElement menuButton = driver.findElement(menuButtonLocator);
-		menuButton.click();
-		waitForElement(adminButtonLocator);
-		
-		logger.info("Click on admin icon ...");
-		WebElement adminButton = driver.findElement(adminButtonLocator);
-		logger.info(" isVisible = " + adminButton.isDisplayed());
-		waitForElementVisible(adminButtonLocator);
-		adminButton.click();
-		logger.info(" isVisible = " + adminButton.isDisplayed());
+		activateMenu();
 		
 		logger.info("Click on Add content link ...");
 		WebElement addContentButton = driver.findElement(addContentLocator);
@@ -70,6 +61,22 @@ public class HomePage extends AtriumBasePage {
 		
 		logger.info(" Content Page found " + getTitle());
 		return new AddContentPage(driver);
+	}
+	
+	public ContentPage selectContentFromMenu() throws InterruptedException {
+		
+		activateMenu();
+		
+		logger.info("Click on Content link ...");
+		WebElement contentButton = driver.findElement(contentLocator);
+		logger.info(" isVisible = " + contentButton.isDisplayed());
+		contentButton.click();
+		
+		waitForElement(ContentPage.contentLocator);
+		
+		logger.info(" Content Page found " + getTitle());
+		
+		return new ContentPage(driver);
 	}
 	
 	public boolean isSpaceMenuPresent(String spaceName) {
@@ -86,5 +93,20 @@ public class HomePage extends AtriumBasePage {
 		WebElement spaceButton = driver.findElement(By.linkText(spaceName));
 		
 		return new SpacePage(driver);
+	}
+	
+	private void activateMenu() throws InterruptedException {
+		
+		logger.info("Click on << menu button ...");
+		WebElement menuButton = driver.findElement(menuButtonLocator);
+		menuButton.click();
+		waitForElement(adminButtonLocator);
+		
+		logger.info("Click on admin icon ...");
+		WebElement adminButton = driver.findElement(adminButtonLocator);
+		logger.info(" isVisible = " + adminButton.isDisplayed());
+		waitForElementVisible(adminButtonLocator);
+		adminButton.click();
+		logger.info(" isVisible = " + adminButton.isDisplayed());	
 	}
 }
