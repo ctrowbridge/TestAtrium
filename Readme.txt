@@ -1,5 +1,5 @@
 This project contains a set of automated tests to check the Open Atrium application.
-Automation is performed using Selenium.
+Automation is performed using Selenium, Cucumber with a TestNG framework.
 
 The Bitnami Open Atrium stack was used for testing. This can be downloaded from
 https://bitnami.com/stack/openatrium
