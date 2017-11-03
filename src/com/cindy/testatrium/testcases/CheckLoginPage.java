@@ -13,6 +13,8 @@ import com.cindy.SeleniumCommon.BaseUtils;
 import com.cindy.SeleniumCommon.BaseTestCase.DriverType;
 
 /**
+ * Performs various tests on the Login page.
+ * 
  * <pre>
  * Feature:  Check Atrium login page
  * Scenario: Check various elements on Atrium login page
@@ -38,6 +40,12 @@ public class CheckLoginPage extends AtriumBaseTestCase {
 		createDriver(DriverType.CHROME, 15);
 	}
 
+	/**
+	 * Perform various checks on the Login page.
+	 * 
+	 * @throws InterruptedException when page times out.
+	 * @throws IOException
+	 */
 	@Test
 	public void testLoginPage() throws InterruptedException, IOException {
 
@@ -70,7 +78,6 @@ public class CheckLoginPage extends AtriumBaseTestCase {
 		boolean searchButtonExists = loginPage.searchButtonExists();
 		logger.info(" searchButtonExists = " + searchButtonExists);
 		Assert.assertTrue(searchTextExists);
-
 	}
 
 	private void checkDocumentationUrl() {

@@ -14,7 +14,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 /**
- * Defines Cucumber steps for User features.
+ * Contains step definitions for Cucumber steps for User features.
  * 
  * @author Cindy
  */

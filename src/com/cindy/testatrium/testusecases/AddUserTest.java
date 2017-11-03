@@ -22,6 +22,8 @@ import com.cindy.testatrium.testcases.AtriumBaseTestCase;
  * Contains test to run Scenario 2
  * 
  * @author Cindy
+ * 
+ * @deprecated Replaced by add_user feature
  */
 /*-
  * Scenario 2: Add User to Site
@@ -34,7 +36,6 @@ import com.cindy.testatrium.testcases.AtriumBaseTestCase;
  *      and    Ensure new user was added
  *      and    Logoff
  *      
- * @deprecated Replaced by add_user feature
  */
 @Deprecated
 public class AddUserTest extends AtriumBaseTestCase {

@@ -1,5 +1,10 @@
 package com.cindy.testatrium.data;
 
+/**
+ * Encapsulates a Space in Atrium. A space is a large collection of content.
+ * 
+ * @author Cindy
+ */
 public class Space {
 
 	public enum GroupVisibility {PUBLIC, PRIVATE};
@@ -10,19 +15,18 @@ public class Space {
 	private GroupVisibility groupVisibilty;
 	private boolean provideMenuLink;
 	
-	
 	public Space() {
 		super();
 		title = "";
 		summary = "";
 		description = "";
 		groupVisibilty = GroupVisibility.PUBLIC;
-		provideMenuLink = false;
-		
+		provideMenuLink = false;	
 	}
 
 	public Space(String title, String summary, String description, GroupVisibility groupVisibilty,
 			boolean provideMenuLink) {
+		
 		super();
 		this.title = title;
 		this.summary = summary;
@@ -61,6 +65,4 @@ public class Space {
 	public void setProvideMenuLink(boolean provideMenuLink) {
 		this.provideMenuLink = provideMenuLink;
 	}
-	
-	
 }

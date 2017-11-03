@@ -43,10 +43,10 @@ public class HomePage extends AtriumBasePage {
 	}
 	
 	/**
-	 * Clicks on Menu Button -> Admin Icon -> Add Content.
+	 * Clicks on Menu Button - Admin Icon - Add Content.
 	 * 
-	 * @return
-	 * @throws InterruptedException 
+	 * @return this page
+	 * @throws InterruptedException  when page times out
 	 */
 	public AddContentPage selectAddContentFromMenu() throws InterruptedException {
 		

@@ -103,7 +103,7 @@ public class AddUserPage extends AtriumBasePage {
 	 * Clears the Administrator and Editor Roles.  The Authenticated User is not
 	 * editable.
 	 * 
-	 * @return
+	 * @return this page
 	 */
 	public AddUserPage clearRoles() {
 		
@@ -123,8 +123,8 @@ public class AddUserPage extends AtriumBasePage {
 	/**
 	 * Sets the input role.
 	 * 
-	 * @param role
-	 * @return
+	 * @param role Role used to set user role
+	 * @return this page
 	 */
 	public AddUserPage setRole(UserInfo.Roles role) {
 		
@@ -185,7 +185,7 @@ public class AddUserPage extends AtriumBasePage {
 	 * Get the password confirmation message. This message is displayed next to
 	 * the second password field.
 	 * 
-	 * @return
+	 * @return Password confirmation message
 	 */
 	public String getPasswordConfirm() {
 		
@@ -196,8 +196,8 @@ public class AddUserPage extends AtriumBasePage {
 	/**
 	 * Gets the status (true or false) of the input role.
 	 * 
-	 * @param role
-	 * @return
+	 * @param role Input role
+	 * @return Status of the input role
 	 */
 	public boolean getRole(UserInfo.Roles role) {
 		

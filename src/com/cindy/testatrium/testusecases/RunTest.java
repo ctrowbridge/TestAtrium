@@ -9,7 +9,7 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
 		"html:target/cucumber-html-report" }, glue = "com.cindy.testatrium.steps", tags = { "@wip" })
 
 /**
- * Runs a set of Cucumber tests using TestNG
+ * Runs a set of Cucumber tests using TestNG.
  * 
  * @author Cindy
  */

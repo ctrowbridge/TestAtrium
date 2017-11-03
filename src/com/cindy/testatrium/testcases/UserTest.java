@@ -24,7 +24,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
- * Contains various tests for user-related functionality.
+ * Performs various tests for user-related functionality.
  * 
  * @author Cindy
  */
@@ -54,7 +54,7 @@ public class UserTest extends AtriumBaseTestCase {
 	/**
 	 * Test the User Dashboard page
 	 * 
-	 * @throws InterruptedException
+	 * @throws InterruptedException when page times out
 	 */
 	@Test
 	public void testUserDashboard() throws InterruptedException {
@@ -74,7 +74,7 @@ public class UserTest extends AtriumBaseTestCase {
 	/**
 	 * Test the Settings page
 	 * 
-	 * @throws InterruptedException
+	 * @throws InterruptedException when page times out
 	 */
 	@Deprecated
 	//@Test
@@ -92,7 +92,7 @@ public class UserTest extends AtriumBaseTestCase {
 	 * Tests the User Profile Account Info page and the User Profile User Info
 	 * page.
 	 * 
-	 * @throws InterruptedException
+	 * @throws InterruptedException when page times out
 	 */
 	//@Test
 	public void testProfile() throws InterruptedException {

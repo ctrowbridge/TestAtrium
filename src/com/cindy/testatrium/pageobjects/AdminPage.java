@@ -59,7 +59,7 @@ public class AdminPage extends AdminBasePage {
 	
 	/**
 	 * Returns the list of tasks present on the Task tab of the Admin page.
-	 * @return
+	 * @return List of tasks in the Task tab
 	 */
 	public List<Task> getTasks() {
 		

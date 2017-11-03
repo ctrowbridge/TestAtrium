@@ -35,7 +35,7 @@ public abstract class AtriumBaseTestCase extends BaseTestCase {
 	/**
 	 * Opens the Login page.
 	 * 
-	 * @throws InterruptedException
+	 * @throws InterruptedException when page times out
 	 */
 	protected void openLoginPage() throws InterruptedException {
 		

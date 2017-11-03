@@ -3,7 +3,7 @@ package com.cindy.testatrium.data;
 import org.openqa.selenium.WebElement;
 
 /**
- * Encapsulates a Task in Atrium.
+ * Encapsulates a Task in Atrium. A Task is a unit of work to be performed.
  * 
  * @author Cindy
  */
@@ -13,6 +13,7 @@ public class Task {
 	WebElement link;
 	
 	public Task(String label, WebElement link) {
+		
 		super();
 		this.label = label;
 		this.link = link;
@@ -34,5 +35,4 @@ public class Task {
 	public String toString() {
 		return "Task [label=" + label + ", link=" + link + "]";
 	}
-
 }

@@ -48,7 +48,7 @@ public class PeoplePage extends AdminBasePage {
 	/**
 	 * Retrieves a list of people from the People Page.
 	 * 
-	 * @return
+	 * @return List of people
 	 */
 	public List<UserInfo> getPeople() {
 

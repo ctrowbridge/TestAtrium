@@ -47,7 +47,7 @@ public class AdminTest extends AtriumBaseTestCase {
 	/**
 	 * Tests various capabilities of the Admin page.
 	 * 
-	 * @throws InterruptedException
+	 * @throws InterruptedException when page times out
 	 */
 	@Test
 	public void testAdminPage() throws InterruptedException {

@@ -71,7 +71,7 @@ public class SettingsPage extends AtriumBasePage {
 	 * 
 	 * @param toSettings Setting to use for the update.
 	 * @return Updated Settings page
-	 * @throws InterruptedException
+	 * @throws InterruptedException if page times out
 	 */
 	public SettingsPage updateSettings(UserSettings toSettings) throws InterruptedException {
 		

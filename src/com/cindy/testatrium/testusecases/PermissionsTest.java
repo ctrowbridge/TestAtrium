@@ -3,6 +3,12 @@ package com.cindy.testatrium.testusecases;
 import com.cindy.testatrium.testcases.AtriumBaseTestCase;
 
 /**
+ * Contains test for permissions.
+ * 
+ * @author Cindy
+ */
+
+/*-
  * Source:  https://www.drupal.org/node/2752303
  * 
  * Public space with a public Discussion section. Configure write permission
@@ -30,8 +36,6 @@ import com.cindy.testatrium.testcases.AtriumBaseTestCase;
  * Step 3: Add group to space
  *
  * Go to the space and add the group to the members list.
- * 
- * @author Cindy
  */
 public class PermissionsTest extends AtriumBaseTestCase {
 

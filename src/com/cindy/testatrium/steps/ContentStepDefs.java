@@ -9,6 +9,11 @@ import cucumber.api.PendingException;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
+/**
+ * Contains step definitions for Cucumber tests for Content page tests.
+ * 
+ * @author Cindy
+ */
 public class ContentStepDefs extends BaseStepDefs {
 
 	@When("^I open the Content Page$")

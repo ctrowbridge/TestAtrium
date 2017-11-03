@@ -46,7 +46,7 @@ public class Basic extends AtriumBaseTestCase {
 	/**
 	 * Checks login and site map
 	 * 
-	 * @throws InterruptedException
+	 * @throws InterruptedException when the page times out
 	 */
 	@Test
 	public void basicTest() throws InterruptedException {
@@ -93,7 +93,7 @@ public class Basic extends AtriumBaseTestCase {
 	/**
 	 * Opens the Site Map page
 	 * 
-	 * @throws InterruptedException
+	 * @throws InterruptedException when page times out
 	 */
 	private void openSiteMapPage() throws InterruptedException {
 		
@@ -115,7 +115,7 @@ public class Basic extends AtriumBaseTestCase {
 	 * Opens the Admin page. Note that an "Access Denied" page should appear
 	 * since the user isn't logged in.
 	 * 
-	 * @throws InterruptedException
+	 * @throws InterruptedException when page times out
 	 */
 	private void openAdminPage() throws InterruptedException {
 		logger.info("Open Admin Page ...");

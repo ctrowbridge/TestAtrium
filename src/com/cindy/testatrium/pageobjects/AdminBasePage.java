@@ -10,7 +10,7 @@ import org.openqa.selenium.WebElement;
 import com.cindy.testatrium.data.Task;
 
 /**
- * Implements base page for Page Objects accessed from the Reports page.  All AdminBasePage
+ * Implements base page for Page Objects accessed from the Admin page.  All AdminBasePage
  * objects contain breadcrumbs, and a list of tasks.  Some of them may contain tabs.
  * 
  * @author Cindy
@@ -27,8 +27,9 @@ public class AdminBasePage extends AtriumBasePage {
 	}
 	
 	/**
-	 * Returns the list of tasks present on the Task tab of the Admin page.
-	 * @return
+	 * Returns the list of tasks present on the Task tab of the page.
+	 * 
+	 * @return List of tasks in the Task tab
 	 */
 	public List<Task> getTasks() {
 		
@@ -43,6 +44,12 @@ public class AdminBasePage extends AtriumBasePage {
 		return taskList;
 	}
 	
+	/**
+	 * Determines whether a particular task exists on the page.
+	 * 
+	 * @param task Task to check
+	 * @return true if the input task exists, false otherwise
+	 */
 	public boolean taskExists(String task) {
 		return isElementPresent(By.linkText(task));
 	}

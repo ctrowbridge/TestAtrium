@@ -31,10 +31,10 @@ public class CreateDefaultSpacePage extends AtriumBasePage {
 	}
 
 	/**
-	 * Creates a Default Space given the input Space data
+	 * Creates a Space given the input Space data
 	 * 
-	 * @param spaceData
-	 * @return
+	 * @param spaceData Data to be used to create a Space.
+	 * @return this page
 	 */
 	public SpacePage createSpace(Space spaceData) {
 
