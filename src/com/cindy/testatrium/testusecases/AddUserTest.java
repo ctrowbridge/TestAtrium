@@ -33,7 +33,10 @@ import com.cindy.testatrium.testcases.AtriumBaseTestCase;
  *      and    Add new user
  *      and    Ensure new user was added
  *      and    Logoff
+ *      
+ * @deprecated Replaced by add_user feature
  */
+@Deprecated
 public class AddUserTest extends AtriumBaseTestCase {
 
 	private static final Logger logger = LogManager.getLogger("AddUserTest");

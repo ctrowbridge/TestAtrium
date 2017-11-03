@@ -1,3 +1,5 @@
+# Author:  Cindy Trowbridge
+
 Feature: User Tests
 	Test for user settings and other options available from the user menu
 

@@ -33,6 +33,7 @@ public class PeoplePage extends AdminBasePage {
 	private static By editNameLocator = By.id("edit-name");
 	private static By editSubmitLocator = By.id("edit-submit");
 	private static By sureCancelLocator = By.id("views-form-admin-views-user-system-1");
+	private static By closeButtonLocator = By.className("close");
 	
 	public PeoplePage(WebDriver driver) {
 		super(driver);
@@ -121,7 +122,6 @@ public class PeoplePage extends AdminBasePage {
 		} else {
 			user.setStatus(UserInfo.Status.BLOCKED);
 		}
-
 		return user;
 	}
 
@@ -153,7 +153,6 @@ public class PeoplePage extends AdminBasePage {
 		dropdown.selectByVisibleText(operationToString(op));
 		
 		return this;
-		
 	}
 
 	public String operationToString(Operation op) {
@@ -194,6 +193,21 @@ public class PeoplePage extends AdminBasePage {
 		
 		WebElement confirmButton = driver.findElement(editSubmitLocator);
 		confirmButton.click();
+		
+		waitForElementVisible(closeButtonLocator);
+		
+		return this;
+	}
+	
+	public PeoplePage deleteUser(UserInfo userInfo) throws InterruptedException {
+		
+		selectUser(userInfo);
+		selectOperation(Operation.CANCEL_USER);
+		selectExecute();
+		selectDeleteAccount();
+		confirmDelete();
+		
+		waitForElementVisible(closeButtonLocator);
 		
 		return this;
 	}

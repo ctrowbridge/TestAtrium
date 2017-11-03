@@ -36,6 +36,7 @@ public class AddUserPage extends AtriumBasePage {
 	}
 
 	public AddUserPage open() {
+		
 		driver.get(url);
 		waitForPageLoaded();
 		return this;
@@ -49,7 +50,6 @@ public class AddUserPage extends AtriumBasePage {
 	public AddUserPage addUser(UserInfo newUser) {
 		
 		setUsername(newUser.getUsername());
-		
 		selectCreateNewAccount();
 		
 		return new AddUserPage(driver);
@@ -194,12 +194,13 @@ public class AddUserPage extends AtriumBasePage {
 	}
 	
 	/**
-	 * Gets the status (true or false) of the input rol.
+	 * Gets the status (true or false) of the input role.
 	 * 
 	 * @param role
 	 * @return
 	 */
 	public boolean getRole(UserInfo.Roles role) {
+		
 		boolean roleSet = false;
 
 		switch (role) {
@@ -233,5 +234,4 @@ public class AddUserPage extends AtriumBasePage {
 		WebElement edit = driver.findElement(displayNameLocator);
 		return edit.getAttribute("value");
 	}
-
 }

@@ -133,7 +133,6 @@ public class UserStepDefs extends BaseStepDefs {
 
 		logger.debug(" addUserPage title       = " + addUserPage.getTitle());
 		logger.debug(" addUserPage breadcrumbs = " + addUserPage.getBreadcrumbs());
-
 	}
 
 	@Then("^I see the Add New User page$")
@@ -165,7 +164,7 @@ public class UserStepDefs extends BaseStepDefs {
 
 		String message = addUserPage.getErrorMessage();
 		logger.info(" error message = " + message);
-		Assert.assertTrue(message.contains("Created a new account"));
+		Assert.assertTrue(message.contains("Created a new account") || message.contains("No e-mail has been sent"));
 	}
 
 	@When("^I select the non-admin user$")
@@ -177,33 +176,30 @@ public class UserStepDefs extends BaseStepDefs {
 		
 		Assert.assertTrue(peoplePage.ifUserExists(userInfo));
 		peoplePage = peoplePage.selectUser(userInfo);
-
 	}
 
-	@When("^I cancel a the non-admin user$")
-	public void i_cancel_a_the_non_admin_user() throws Throwable {
-
+	@When("^I delete the non-admin user$")
+	public void i_delete_the_non_admin_user() throws Throwable {
+		
 		logger.info("Cancel non-admin user ...");
 
 		UserInfo userInfo = new UserInfo();
 		userInfo.setDisplayName(nonAdminDisplayName);
-
+		
 		List<UserInfo> people = peoplePage.getPeople();
 		peopleCountBeforeDelete = people.size();
 		logger.info(" peopleCountBeforeDelete = " + peopleCountBeforeDelete);
-
-		peoplePage = peoplePage.selectOperation(Operation.CANCEL_USER);
-		peoplePage = peoplePage.selectExecute();
-		peoplePage = peoplePage.selectDeleteAccount();
-		peoplePage = peoplePage.confirmDelete();
 		
-		// TODO:  need a wait here!
-
+		peoplePage = peoplePage.deleteUser(userInfo);
+		
 		people = peoplePage.getPeople();
 		peopleCountAfterDelete = people.size();
 		logger.info(" peopleCountAfterDelete = " + peopleCountAfterDelete);
+		
+		String message = peoplePage.getErrorMessage();
+		logger.info(" message = " + message);
 	}
-
+	
 	@Then("^The non-admin user is deleted$")
 	public void the_non_admin_user_is_deleted() throws Throwable {
 

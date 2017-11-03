@@ -7,8 +7,7 @@ Feature:  Add User
   	Given I open a browser
 		When I open Login page
   
-  @wip
-  Scenario:  Add User
+  Scenario:  Add Non-admin User
 		When I login as admin user
 		And I open Admin page
 		Then I see the Admin page
@@ -19,12 +18,11 @@ Feature:  Add User
 		When I enter a new non-admin user
 		And I select to Create new Account
 		Then new non-admin user is created
-		
-	Scenario:  Delete User
+	
+	Scenario:  Delete Non-admin User
 		When I login as admin user
 		And I open Admin page
 		When I select the People task from the Admin page
-		And I select the non-admin user
-		And I cancel a the non-admin user
+		And I delete the non-admin user
 		Then The non-admin user is deleted
 		
