@@ -36,5 +36,4 @@ Feature: User Tests
 		Given I login as admin user
 		When I select Dashboard from the user menu
 		Then I see the Dashboard page
-		
-		
+	

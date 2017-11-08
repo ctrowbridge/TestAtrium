@@ -27,8 +27,11 @@ import com.cindy.SeleniumCommon.BaseTestCase.DriverType;
  * Then: Search button is present
  * </pre>
  * 
+ * @deprecated Replaced by login_page.feature
+ * 
  * @author Cindy
  */
+@Deprecated
 public class CheckLoginPage extends AtriumBaseTestCase {
 
 	private static final Logger logger = LogManager.getLogger("CheckHomePage");
@@ -80,6 +83,7 @@ public class CheckLoginPage extends AtriumBaseTestCase {
 		Assert.assertTrue(searchTextExists);
 	}
 
+	@Deprecated
 	private void checkDocumentationUrl() {
 
 		logger.info("Check documentation URL ...");

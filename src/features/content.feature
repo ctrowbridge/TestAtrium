@@ -18,7 +18,6 @@ Feature:  Content
 		| Files    |
 		| Messages |
 	
-	@wip	
 	Scenario:  Add content
   	When I login as admin user
   	And I open the Content Page
@@ -27,4 +26,3 @@ Feature:  Content
   	When I select Group from the Add Content page
   	Then I see the Create Group page
 	
-  	

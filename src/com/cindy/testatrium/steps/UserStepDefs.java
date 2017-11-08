@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.testng.Assert;
 
+import com.cindy.SeleniumCommon.BaseUtils;
 import com.cindy.testatrium.data.Task;
 import com.cindy.testatrium.data.UserInfo;
 import com.cindy.testatrium.data.UserSettings;
@@ -173,37 +174,104 @@ public class UserStepDefs extends BaseStepDefs {
 		logger.info("Select non admin user");
 		UserInfo userInfo = new UserInfo();
 		userInfo.setDisplayName(nonAdminDisplayName);
-		
+
 		Assert.assertTrue(peoplePage.ifUserExists(userInfo));
 		peoplePage = peoplePage.selectUser(userInfo);
 	}
 
 	@When("^I delete the non-admin user$")
 	public void i_delete_the_non_admin_user() throws Throwable {
-		
+
 		logger.info("Cancel non-admin user ...");
 
 		UserInfo userInfo = new UserInfo();
 		userInfo.setDisplayName(nonAdminDisplayName);
-		
+
 		List<UserInfo> people = peoplePage.getPeople();
 		peopleCountBeforeDelete = people.size();
 		logger.info(" peopleCountBeforeDelete = " + peopleCountBeforeDelete);
-		
+
 		peoplePage = peoplePage.deleteUser(userInfo);
-		
+
 		people = peoplePage.getPeople();
 		peopleCountAfterDelete = people.size();
 		logger.info(" peopleCountAfterDelete = " + peopleCountAfterDelete);
-		
+
 		String message = peoplePage.getErrorMessage();
 		logger.info(" message = " + message);
 	}
-	
+
 	@Then("^The non-admin user is deleted$")
 	public void the_non_admin_user_is_deleted() throws Throwable {
 
 		int diff = peopleCountBeforeDelete - peopleCountAfterDelete;
 		Assert.assertTrue(diff == 1);
+	}
+
+	@Then("^the title is \"([^\"]*)\"$")
+	public void the_title_is(String title) throws Throwable {
+
+		logger.info("check title (" + title + "}");
+		Assert.assertNotNull(loginPage);
+		String titleStr = loginPage.getTitle();
+
+		logger.info(" titleStr = " + titleStr);
+		Assert.assertTrue(titleStr.equals(title));
+	}
+
+	@Then("^the document URL on the Login page is a valid link$")
+	public void the_document_URL_on_the_Login_page_is_a_valid_link() throws Throwable {
+
+		logger.info("Check documentation URL ...");
+		Assert.assertNotNull(loginPage);
+		String url = loginPage.getDocumentationURL();
+		logger.info(" url = " + url);
+		boolean urlOk = BaseUtils.checkURL(url);
+		logger.info(" urlOK = " + urlOk);
+		Assert.assertTrue(urlOk);
+	}
+
+	@When("^I select the Log In button from the Login Page$")
+	public void i_select_the_Log_In_button_from_the_Login_Page() throws Throwable {
+
+		logger.info("Select Log In (with missing data)");
+		Assert.assertNotNull(loginPage);
+		loginPage = loginPage.selectLoginError();
+	}
+
+	@Then("^I see the error message \"([^\"]*)\"$")
+	public void i_see_the_error_message(String expectedErrorMessage) throws Throwable {
+
+		logger.info("Check for error message " + expectedErrorMessage + " ...");
+		String errorMessage = loginPage.getErrorMessage();
+		logger.info(" errorMessage = \"" + errorMessage + "\"");
+		Assert.assertTrue(errorMessage.contains(expectedErrorMessage));
+	}
+
+	@When("^I set the Username in the login screen to \"([^\"]*)\"$")
+	public void i_set_the_Username_in_the_login_screen_to(String userName) throws Throwable {
+
+		logger.info("Set user name to " + userName);
+		Assert.assertNotNull(loginPage);
+		loginPage.setUsername(userName);
+	}
+
+	@When("^I set the password to \"([^\"]*)\"$")
+	public void i_set_the_password_to(String password) throws Throwable {
+
+		logger.info("Set password to " + password);
+		Assert.assertNotNull(loginPage);
+		loginPage.setPassword(password);
+	}
+
+	@Then("^the menu is present on the Login page$")
+	public void the_menu_is_present_on_the_Login_page() throws Throwable {
+
+		Assert.assertNotNull(loginPage);
+		logger.info("Check that menu exists ...");
+		boolean menuExists = loginPage.menuExists();
+		logger.info(" menuExists = " + menuExists);
+		Assert.assertTrue(menuExists);
+
 	}
 }

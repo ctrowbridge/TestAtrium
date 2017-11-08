@@ -1,8 +1,11 @@
 package com.cindy.testatrium.steps;
 
+import java.util.List;
+
 import org.testng.Assert;
 
 import com.cindy.SeleniumCommon.BaseUtils;
+import com.cindy.testatrium.data.Task;
 import com.cindy.testatrium.data.UserInfo;
 import com.cindy.testatrium.pageobjects.AdminPage;
 import com.cindy.testatrium.pageobjects.LoginPage;
@@ -40,6 +43,13 @@ public class StepDefs extends BaseStepDefs {
 		loginPage = new LoginPage(test.getDriver());
 		Assert.assertNotNull(loginPage);
 		logger.info(" loginPage title = " + loginPage.getTitle());
+		
+		List<Task> menuTasks = loginPage.getMenuTasks();
+		logger.debug(" menuTasks size = " + menuTasks.size());
+		for (Task task : menuTasks) {
+			logger.debug(" task = " + task);
+		}
+		
 	}
 	
 	@Then("^User is not logged in$")

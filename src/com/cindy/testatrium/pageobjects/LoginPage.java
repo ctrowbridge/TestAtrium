@@ -1,10 +1,14 @@
 package com.cindy.testatrium.pageobjects;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
+import com.cindy.testatrium.data.Task;
 import com.cindy.testatrium.data.UserInfo;
 
 /**
@@ -26,6 +30,7 @@ public class LoginPage extends AtriumBasePage {
 	private By searchFieldButtonLocator = By.xpath("//button[@type='submit']");
 	private By searchLabelLocator = By.xpath("//div[@id='edit-basic']/div/label");
 	private By siteMapTopLocator = By.id("oa-sitemap-top");
+	private By menuLocator = By.id("oa-space-menu");
 
 	public LoginPage(WebDriver driver) {
 		super(driver);
@@ -46,6 +51,11 @@ public class LoginPage extends AtriumBasePage {
 		return driver.getTitle();
 	}
 
+	/**
+	 * Does the "hamburger" menu exist on the login page?
+	 * 
+	 * @return True if the "hamburger" menu exists on the login page.
+	 */
 	public boolean menuExists() {
 
 		if (isElementPresent(mainMenuButtonLocator)) {
@@ -54,6 +64,30 @@ public class LoginPage extends AtriumBasePage {
 		return false;
 	}
 
+	/**
+	 * Retrieve a list of items in the "hamburger" menu.
+	 * 
+	 * @return List of items (tasks) in the "hamburger" menu
+	 */
+	public List<Task> getMenuTasks() {
+		
+		List<Task> tasks = new ArrayList<Task>();
+		
+		WebElement menuButton = driver.findElement(mainMenuButtonLocator);
+
+		Actions builder = new Actions(driver);
+		builder.moveToElement(menuButton).perform();
+		
+		WebElement menu = driver.findElement(menuLocator);
+		List<WebElement> menuItems = menu.findElements(By.tagName("a"));
+		for (WebElement item : menuItems) {
+			String text = item.getText();
+			Task task = new Task(text, item);
+			tasks.add(task);
+		}
+		return tasks;	
+	}
+	
 	public SiteMapPage selectSiteMap() throws InterruptedException {
 
 		WebElement menuButton = driver.findElement(mainMenuButtonLocator);
@@ -78,17 +112,15 @@ public class LoginPage extends AtriumBasePage {
 
 	public HomePage login(String user, String password) {
 
-		driver.findElement(usernameLocator).clear();
-		driver.findElement(usernameLocator).sendKeys(user);
-
-		driver.findElement(passwordLocator).clear();
-		driver.findElement(passwordLocator).sendKeys(password);
+		setUsername(user);
+		setPassword(password);
 		driver.findElement(submitLocator).click();
 
 		return new HomePage(driver);
 	}
 
 	public boolean isLoggedIn() {
+		
 		if (isElementPresent(loginButtonLocator)) {
 			return false;
 		}
@@ -96,11 +128,13 @@ public class LoginPage extends AtriumBasePage {
 	}
 
 	public String getDocumentationURL() {
+		
 		WebElement documentationLink = driver.findElement(documentationLocation);
 		return documentationLink.getAttribute("href");
 	}
 
 	public LoginPage enterSearchString(String searchString) {
+		
 		WebElement searchField = driver.findElement(searchFieldLocator);
 		searchField.clear();
 		searchField.sendKeys(searchString);
@@ -108,6 +142,7 @@ public class LoginPage extends AtriumBasePage {
 	}
 
 	public SearchResultsPage selectSearch() throws InterruptedException {
+		
 		WebElement searchButton = driver.findElement(searchFieldButtonLocator);
 		searchButton.click();
 
@@ -130,5 +165,31 @@ public class LoginPage extends AtriumBasePage {
 			return true;
 		}
 		return false;
+	}
+	
+	public LoginPage selectLoginError() throws InterruptedException {
+		
+		WebElement loginButton = driver.findElement(submitLocator);
+		loginButton.click();
+		
+		waitForElement(errorLocator);
+		
+		return this;
+	}
+	
+	public LoginPage setUsername(String username) {
+		
+		driver.findElement(usernameLocator).clear();
+		driver.findElement(usernameLocator).sendKeys(username);
+		
+		return this;
+	}
+	
+	public LoginPage setPassword(String password) {
+		
+		driver.findElement(passwordLocator).clear();
+		driver.findElement(passwordLocator).sendKeys(password);
+		
+		return this;
 	}
 }
